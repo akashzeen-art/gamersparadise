@@ -1,0 +1,324 @@
+{% set header_title = 'My Profile' %}
+{% set header_title_show = false %}
+{% set header_text = '
+    <div class="banner-content-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px;">
+        <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Logo" class="banner-logo" style="max-width:350px; width:100%; height:auto; display:block; margin:0 auto;">
+        <h1 class="nk-title display-3 banner-title" data-translate-key="جنة الالعاب" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">جنة الالعاب</h1>
+    </div>
+    <style>
+        .banner-content-wrapper { padding: 20px; gap: 5px; }
+        .banner-logo { max-width: 350px !important; margin-bottom: 0 !important; }
+        .banner-title { font-size: 3rem !important; }
+        @media (max-width: 768px) { .banner-logo { max-width: 230px !important; } .banner-title { font-size: 2rem !important; } .banner-content-wrapper { gap: 4px !important; } }
+        @media (max-width: 480px) { .banner-logo { max-width: 190px !important; } .banner-title { font-size: 1.5rem !important; } .banner-content-wrapper { gap: 3px !important; padding: 15px !important; } }
+    </style>
+' %}
+{% set header_image = 'assets/images/banner-ar.png' %}
+{% set header_size = 'md' %}
+{% set header_visible = 6 %}
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+<div class="bg-dark-1 nk-box">
+    <div class="container">
+        <div class="nk-gap-6"></div>
+
+        <h2 class="text-center" style="color:#fff; margin-bottom:40px;">ملفي الشخصي</h2>
+        <div class="nk-gap-3"></div>
+
+        <!-- Profile Card -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="profile-card" style="background:#1a1a1a; border:2px solid #333; border-radius:15px; padding:40px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+                    
+                    <!-- User Field -->
+                    <div class="profile-field" style="margin-bottom:30px;">
+                        <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
+                            المستخدم:
+                        </label>
+                        <input type="text" id="userField" class="profile-input" 
+                               placeholder="......................." 
+                               style="width:100%; padding:15px; background:#2a2a2a; border:2px solid #444; border-radius:8px; color:#fff; font-size:16px; direction:rtl; transition:all 0.3s ease;"
+                               onfocus="this.style.borderColor='#e63946'; this.style.background='#333';"
+                               onblur="this.style.borderColor='#444'; this.style.background='#2a2a2a';">
+                    </div>
+
+                    <!-- Status Field -->
+                    <div class="profile-field" style="margin-bottom:30px;">
+                        <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
+                            الحالة:
+                        </label>
+                        <input type="text" id="statusField" class="profile-input" 
+                               placeholder="...................." 
+                               style="width:100%; padding:15px; background:#2a2a2a; border:2px solid #444; border-radius:8px; color:#fff; font-size:16px; direction:rtl; transition:all 0.3s ease;"
+                               onfocus="this.style.borderColor='#e63946'; this.style.background='#333';"
+                               onblur="this.style.borderColor='#444'; this.style.background='#2a2a2a';">
+                    </div>
+
+                    <!-- Validity Field -->
+                    <div class="profile-field" style="margin-bottom:30px;">
+                        <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
+                            الصلاحية:
+                        </label>
+                        <input type="text" id="validityField" class="profile-input" 
+                               placeholder="...................." 
+                               style="width:100%; padding:15px; background:#2a2a2a; border:2px solid #444; border-radius:8px; color:#fff; font-size:16px; direction:rtl; transition:all 0.3s ease;"
+                               onfocus="this.style.borderColor='#e63946'; this.style.background='#333';"
+                               onblur="this.style.borderColor='#444'; this.style.background='#2a2a2a';">
+                    </div>
+
+                    <!-- Unsubscribe Button (Hidden by default, shown when subscribed) -->
+                    <div id="unsubscribeContainer" style="display:none; margin-top:40px; text-align:center;">
+                        <button id="unsubscribeBtn" class="unsubscribe-btn" 
+                                style="background:linear-gradient(135deg, #dc3545 0%, #c82333 100%); color:#fff; border:none; padding:15px 40px; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(220,53,69,0.3);"
+                                onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(220,53,69,0.5)';"
+                                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(220,53,69,0.3)';"
+                                onclick="handleUnsubscribe()">
+                            إلغاء الاشتراك
+                        </button>
+                    </div>
+
+                    <!-- Subscribe Button (Shown when not subscribed) -->
+                    <div id="subscribeContainer" style="margin-top:40px; text-align:center;">
+                        <button id="subscribeBtn" class="subscribe-btn" 
+                                style="background:linear-gradient(135deg, #28a745 0%, #218838 100%); color:#fff; border:none; padding:15px 40px; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(40,167,69,0.3);"
+                                onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(40,167,69,0.5)';"
+                                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(40,167,69,0.3)';"
+                                onclick="handleSubscribe()">
+                            الاشتراك
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="nk-gap-6"></div>
+    </div>
+</div>
+
+<script>
+// Load saved profile data from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+    // Load saved values
+    const savedUser = localStorage.getItem('profileUser');
+    const savedStatus = localStorage.getItem('profileStatus');
+    const savedValidity = localStorage.getItem('profileValidity');
+    const isSubscribed = localStorage.getItem('isSubscribed') === 'true';
+    const currentLang = localStorage.getItem('siteLang') || 'ar';
+
+    if (savedUser) document.getElementById('userField').value = savedUser;
+    if (savedStatus) {
+        // Translate status if needed
+        const isEnglish = currentLang === 'en';
+        if (savedStatus === 'مشترك' && isEnglish) {
+            document.getElementById('statusField').value = 'Subscribed';
+        } else if (savedStatus === 'Subscribed' && !isEnglish) {
+            document.getElementById('statusField').value = 'مشترك';
+        } else if (savedStatus === 'غير مشترك' && isEnglish) {
+            document.getElementById('statusField').value = 'Not Subscribed';
+        } else if (savedStatus === 'Not Subscribed' && !isEnglish) {
+            document.getElementById('statusField').value = 'غير مشترك';
+        } else {
+            document.getElementById('statusField').value = savedStatus;
+        }
+    }
+    if (savedValidity) document.getElementById('validityField').value = savedValidity;
+
+    // Show/hide subscribe/unsubscribe buttons based on subscription status
+    if (isSubscribed) {
+        document.getElementById('unsubscribeContainer').style.display = 'block';
+        document.getElementById('subscribeContainer').style.display = 'none';
+    } else {
+        document.getElementById('unsubscribeContainer').style.display = 'none';
+        document.getElementById('subscribeContainer').style.display = 'block';
+    }
+
+    // Save values on input change
+    document.getElementById('userField').addEventListener('input', function() {
+        localStorage.setItem('profileUser', this.value);
+    });
+    document.getElementById('statusField').addEventListener('input', function() {
+        localStorage.setItem('profileStatus', this.value);
+    });
+    document.getElementById('validityField').addEventListener('input', function() {
+        localStorage.setItem('profileValidity', this.value);
+    });
+});
+
+function handleSubscribe() {
+    const currentLang = localStorage.getItem('siteLang') || 'ar';
+    const isEnglish = currentLang === 'en';
+    
+    // Set subscription status
+    localStorage.setItem('isSubscribed', 'true');
+    
+    // Hide subscribe button, show unsubscribe button
+    document.getElementById('subscribeContainer').style.display = 'none';
+    document.getElementById('unsubscribeContainer').style.display = 'block';
+    
+    // Update status field with translation
+    const statusText = isEnglish ? 'Subscribed' : 'مشترك';
+    document.getElementById('statusField').value = statusText;
+    localStorage.setItem('profileStatus', statusText);
+    
+    // Calculate and set validity date (30 days from today)
+    const today = new Date();
+    const validityDate = new Date(today);
+    validityDate.setDate(today.getDate() + 30); // Add 30 days
+    
+    // Format date as DD/MM/YYYY
+    const day = String(validityDate.getDate()).padStart(2, '0');
+    const month = String(validityDate.getMonth() + 1).padStart(2, '0');
+    const year = validityDate.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    
+    // Update validity field
+    document.getElementById('validityField').value = formattedDate;
+    localStorage.setItem('profileValidity', formattedDate);
+    
+    // Store subscription date for reference
+    localStorage.setItem('subscriptionDate', today.toISOString());
+    
+    // Show translated alert message
+    const alertMsg = isEnglish 
+        ? 'Successfully subscribed! Validity until: ' + formattedDate
+        : 'تم الاشتراك بنجاح! الصلاحية حتى: ' + formattedDate;
+    alert(alertMsg);
+    
+    // Re-apply language to update page text
+    if (window.applyLanguage) {
+        window.applyLanguage(currentLang);
+    }
+}
+
+function handleUnsubscribe() {
+    const currentLang = localStorage.getItem('siteLang') || 'ar';
+    const isEnglish = currentLang === 'en';
+    
+    const confirmMsg = isEnglish 
+        ? 'Are you sure you want to unsubscribe?'
+        : 'هل أنت متأكد من إلغاء الاشتراك؟';
+    
+    if (confirm(confirmMsg)) {
+        // Remove subscription status
+        localStorage.setItem('isSubscribed', 'false');
+        
+        // Hide unsubscribe button, show subscribe button
+        document.getElementById('unsubscribeContainer').style.display = 'none';
+        document.getElementById('subscribeContainer').style.display = 'block';
+        
+        // Update status field with translation
+        const statusText = isEnglish ? 'Not Subscribed' : 'غير مشترك';
+        document.getElementById('statusField').value = statusText;
+        localStorage.setItem('profileStatus', statusText);
+        
+        // Clear validity field
+        document.getElementById('validityField').value = '';
+        localStorage.removeItem('profileValidity');
+        localStorage.removeItem('subscriptionDate');
+        
+        // Show translated alert message
+        const alertMsg = isEnglish 
+            ? 'Successfully unsubscribed!'
+            : 'تم إلغاء الاشتراك بنجاح!';
+        alert(alertMsg);
+        
+        // Re-apply language to update page text
+        if (window.applyLanguage) {
+            window.applyLanguage(currentLang);
+        }
+    }
+}
+</script>
+
+<style>
+.profile-input::placeholder {
+    color: #666;
+    opacity: 0.7;
+}
+
+.profile-input:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 25px !important;
+    }
+    
+    .profile-field {
+        margin-bottom: 20px !important;
+    }
+
+    .profile-field label {
+        font-size: 16px !important;
+    }
+
+    .profile-input {
+        padding: 12px !important;
+        font-size: 15px !important;
+    }
+    
+    .unsubscribe-btn, .subscribe-btn {
+        padding: 12px 30px !important;
+        font-size: 16px !important;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 20px 15px !important;
+    }
+    
+    .profile-field {
+        margin-bottom: 18px !important;
+    }
+
+    .profile-field label {
+        font-size: 15px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .profile-input {
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
+    
+    .unsubscribe-btn, .subscribe-btn {
+        padding: 10px 20px !important;
+        font-size: 15px !important;
+        width: 100%;
+    }
+
+    h2.text-center {
+        font-size: 22px !important;
+        margin-bottom: 30px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .profile-card {
+        padding: 15px 12px !important;
+    }
+
+    .profile-field label {
+        font-size: 14px !important;
+    }
+
+    .profile-input {
+        padding: 8px !important;
+        font-size: 13px !important;
+    }
+
+    .unsubscribe-btn, .subscribe-btn {
+        padding: 8px 15px !important;
+        font-size: 14px !important;
+    }
+}
+</style>
+
+{% endblock %}
+

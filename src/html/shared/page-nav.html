@@ -1,0 +1,1437 @@
+{% macro submenu(nav) -%}
+    {% for file, item in nav -%}
+        <li class="{{ 'active' if isActiveMenuItem(file, item, filename) }} {{ 'nk-mega-item' if item.mega }} {{ 'nk-drop-item' if item.sub }}">
+            <a href="{{file | safe}}">
+                {{item.name | safe}}
+                {%- if item.description -%}
+                    <span class="nk-item-descr">{{item.description | safe}}</span>
+                {%- endif -%}
+            </a>
+            {%- if item.sub -%}
+                {%- if item.mega -%}
+                    <div class="dropdown{{ ' ' + item.class if item.class}}">
+                        {%- if item.background and nav_light != true -%}
+                            <div class="bg-image">
+                                <img src="{{ item.background }}" alt="" class="jarallax-img">
+                            </div>
+                        {%- endif -%}
+                        <ul>
+                            {{ megamenu(item.sub) }}
+                        </ul>
+                    </div>
+                {%- else -%}
+                    <ul class="dropdown">
+                        {{ submenu(item.sub) }}
+                    </ul>
+                {%- endif -%}
+            {%- endif %}
+        </li>
+    {%- endfor %}
+{%- endmacro %}
+
+{% macro megamenu(nav) %}
+    {% for file, item in nav %}
+        <li>
+            {% if item.sub %}
+                <ul>
+                    {{ submenu(item.sub) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+<!--
+    Additional Classes:
+        .nk-header-opaque
+-->
+<header class="nk-header{{ ' nk-header-opaque' if nav_opaque }}">
+
+    {% if nav_contacts %}
+    {% include "shared/page-nav-contacts.html" %}
+    {% endif %}
+
+    <!--
+        START: Navbar
+
+        Additional Classes:
+            .nk-navbar-sticky
+            .nk-navbar-transparent
+            .nk-navbar-autohide
+            .nk-navbar-light
+            .nk-navbar-no-link-effect
+    -->
+    <nav class="nk-navbar nk-navbar-top nk-navbar-sticky nk-navbar-fixed"
+        style="background:#000; direction:rtl; height:70px; display:flex; align-items:center; width:100%; position:relative; z-index:1100;">
+        <div class="container nav-container" style="width:100%; padding:0 40px;">
+            <div class="nk-nav-table"
+                style="display:flex; align-items:center; justify-content:space-between; direction:rtl; width:100%; gap:20px;">
+
+                <!-- Left Section: Logo -->
+                <div class="nav-logo-section" style="display:flex; align-items:center; flex-shrink:0;">
+                <a href="index.html" class="nk-nav-logo"
+                        style="color:#fff; font-size:26px; font-weight:bold; text-decoration:none; white-space:nowrap;">
+                        جنة الالعاب
+                </a>
+                </div>
+
+                <!-- Center Section: Menu Items (Desktop only) -->
+                <div class="nav-menu-section" style="display:flex; align-items:center; flex:1; justify-content:center; gap:70px;">
+                <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile"
+                        style="list-style:none; margin:0; padding:0; display:flex; flex-direction:row; direction:rtl; gap:70px; align-items:center;">
+                    <li class="active">
+                        <a href="index.html"
+                                style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; white-space:nowrap;">
+                            الصفحة الرئيسية
+                        </a>
+                    </li>
+                    <li>
+                        <a href="page-html-games.html"
+                                style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; white-space:nowrap;">
+                            الألعاب
+                        </a>
+                    </li>
+                </ul>
+                </div>
+
+                <!-- Right Section: Profile, Language, Mobile Menu -->
+                <div class="nav-actions-section" style="display:flex; align-items:center; gap:15px; flex-shrink:0;">
+                    <!-- My Profile Link (Always visible, outside burger menu) -->
+                    <div class="profile-link-container" style="display:flex; align-items:center;">
+                        <a href="page-profile.html" class="profile-link-btn" style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; padding:8px 16px; border-radius:5px; background:linear-gradient(135deg, #333 0%, #1a1a1a 100%); border:2px solid #444; transition:all 0.3s ease; white-space:nowrap; display:flex; align-items:center; gap:5px;">
+                            <span class="profile-icon">👤</span>
+                            <span class="profile-text">ملفي الشخصي</span>
+                        </a>
+                    </div>
+
+                    <!-- Language Dropdown (Always visible) -->
+                    <div class="lang-switch-container" style="display:flex; align-items:center; position:relative;">
+                        <div class="lang-dropdown">
+                            <button id="langSwitch" class="lang-switch-btn" aria-haspopup="true" aria-expanded="false">
+                                <span class="lang-icon">🌐</span>
+                                <span class="lang-text" id="langText">العربية</span>
+                            </button>
+                            <ul class="lang-dropdown-menu" id="langMenu" role="menu" aria-hidden="true">
+                                <li role="none"><button role="menuitem" class="lang-option" data-lang="ar">العربية</button></li>
+                                <li role="none"><button role="menuitem" class="lang-option" data-lang="en">English</button></li>
+                </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Burger Menu Button (Extreme Right) -->
+                    <button class="burger-menu-btn d-lg-none" id="burgerMenuBtn" aria-label="Menu" 
+                        style="background:transparent; border:none; color:#fff; cursor:pointer; padding:8px; align-items:center; justify-content:center; width:40px; height:40px; transition:all 0.3s ease; z-index:1101; position:relative;">
+                        <span class="burger-icon">
+                            <span class="burger-line"></span>
+                            <span class="burger-line"></span>
+                            <span class="burger-line"></span>
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <!-- END: Navbar -->
+
+    <!-- Profile Link and Language Switch Styles -->
+    <style>
+    /* Navigation Bar Alignment */
+    .nk-nav-table {
+        min-height: 70px;
+    }
+
+    .nav-logo-section,
+    .nav-menu-section,
+    .nav-actions-section {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Profile Link Button */
+    .profile-link-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: 40px;
+    }
+
+    .profile-link-btn:hover {
+        background: linear-gradient(135deg, #e63946 0%, #c1121f 100%) !important;
+        border-color: #e63946 !important;
+        transform: scale(1.05);
+    }
+
+    .profile-icon {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Language Switch Button */
+    .lang-switch-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.15);
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: Arial, sans-serif;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        white-space: nowrap;
+        height: 38px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Glow effect on hover */
+    .lang-switch-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .lang-switch-btn:hover::before {
+        left: 100%;
+    }
+
+    .lang-switch-btn:hover {
+        background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+        border-color: #e63946;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    }
+
+    .lang-switch-btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+    
+    /* Dropdown arrow */
+    .lang-switch-btn::after {
+        content: '▼';
+        font-size: 8px;
+        margin-left: 4px;
+        transition: transform 0.3s ease;
+        opacity: 0.7;
+    }
+    
+    .lang-dropdown.open .lang-switch-btn::after {
+        transform: rotate(180deg);
+    }
+
+    .lang-icon {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+
+    .lang-text {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .lang-switch-btn.english {
+        direction: ltr;
+    }
+
+    .lang-switch-btn.arabic {
+        direction: rtl;
+    }
+
+    /* ========================================
+       BURGER MENU BUTTON - ENHANCED STYLES
+       ======================================== */
+    .burger-menu-btn {
+        display: none;
+        position: relative;
+        z-index: 100000;
+        background: transparent !important;
+        border: none !important;
+        padding: 10px !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        outline: none !important;
+    }
+    
+    .burger-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 20px;
+        position: relative;
+    }
+    
+    .burger-line {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: #fff !important;
+        border-radius: 2px;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-origin: center;
+    }
+    
+    /* Burger to X animation */
+    .burger-menu-btn.active .burger-line:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .burger-menu-btn.active .burger-line:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    
+    .burger-menu-btn.active .burger-line:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    .burger-menu-btn:hover .burger-line {
+        background: #e63946 !important;
+    }
+    
+    /* Show on mobile only */
+    @media (max-width: 991px) {
+        .burger-menu-btn {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    }
+    
+    @media (min-width: 992px) {
+        .burger-menu-btn {
+            display: none !important;
+        }
+    }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 991px) {
+        .nav-menu-section {
+            display: none;
+        }
+
+        .nav-container {
+            padding: 0 15px !important;
+        }
+
+        .nk-nav-table {
+            gap: 10px !important;
+        }
+
+        .nav-actions-section {
+            gap: 8px !important;
+        }
+        
+        .profile-link-btn {
+            padding: 6px 12px !important;
+            font-size: 14px !important;
+            height: 36px;
+        }
+        
+        .lang-switch-btn {
+            padding: 6px 12px !important;
+            font-size: 12px;
+            height: 36px;
+        }
+        
+        .lang-icon {
+            font-size: 16px;
+        }
+
+        .nav-logo-section .nk-nav-logo {
+            font-size: 20px !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nk-navbar {
+            height: 60px !important;
+        }
+
+        .nk-nav-table {
+            min-height: 60px;
+            gap: 8px !important;
+        }
+
+        .nav-container {
+            padding: 0 12px !important;
+        }
+
+        .nav-logo-section .nk-nav-logo {
+            font-size: 18px !important;
+        }
+
+        .nav-actions-section {
+            gap: 6px !important;
+        }
+
+        .profile-link-btn {
+            padding: 5px 10px !important;
+            font-size: 13px !important;
+            height: 34px;
+        }
+
+        .lang-switch-btn {
+            padding: 5px 10px !important;
+            font-size: 11px;
+            height: 34px;
+        }
+
+        .lang-icon {
+            font-size: 15px;
+        }
+
+        .nk-nav-icons a {
+            height: 34px;
+            width: 34px;
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .nk-navbar {
+            height: 55px !important;
+        }
+
+        .nk-nav-table {
+            min-height: 55px;
+            gap: 5px !important;
+        }
+
+        .nav-container {
+            padding: 0 10px !important;
+        }
+
+        .nav-logo-section {
+            flex: 0 0 auto;
+            max-width: 40%;
+            overflow: hidden;
+        }
+
+        .nav-logo-section .nk-nav-logo {
+            font-size: 16px !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-actions-section {
+            gap: 4px !important;
+            flex-shrink: 0;
+        }
+
+        .profile-text {
+            display: none;
+        }
+        
+        .profile-icon {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .profile-link-btn {
+            padding: 5px 8px !important;
+            min-width: 36px;
+            height: 32px;
+            gap: 0;
+        }
+        
+        .lang-switch-btn {
+            padding: 5px 8px !important;
+            min-width: 36px;
+            height: 32px;
+            gap: 0;
+        }
+        
+        .lang-text {
+            display: none;
+        }
+        
+        .lang-icon {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .nk-nav-icons {
+            flex-shrink: 0;
+        }
+
+        .nk-nav-icons a {
+            height: 32px;
+            width: 32px;
+            font-size: 18px;
+            padding: 4px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .nav-logo-section .nk-nav-logo {
+            font-size: 14px !important;
+        }
+
+        .profile-link-btn,
+        .lang-switch-btn {
+            min-width: 32px;
+            padding: 4px 6px !important;
+        }
+
+        .nk-nav-icons a {
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+        }
+    }
+    /* ========================================
+       MOBILE NAVIGATION SIDEBAR - COMPLETE FIX
+       Slides from RIGHT side (Arabic/RTL style)
+       ======================================== */
+    
+    /* Base mobile menu styles */
+    #nk-nav-mobile,
+    .nk-navbar-side {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: auto !important;
+        bottom: 0 !important;
+        width: 280px !important;
+        max-width: 85vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%) !important;
+        z-index: 99999 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.35s ease-out !important;
+        box-shadow: -4px 0 25px rgba(0,0,0,0.8) !important;
+        direction: rtl !important;
+        display: block !important;
+        visibility: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* When menu is OPEN */
+    #nk-nav-mobile.menu-open,
+    .nk-navbar-side.menu-open {
+        transform: translateX(0) !important;
+    }
+    
+    /* English mode - same right side */
+    body.lang-en #nk-nav-mobile,
+    body.lang-en .nk-navbar-side {
+        direction: ltr !important;
+    }
+    
+    /* Responsive widths */
+    @media (max-width: 480px) {
+        #nk-nav-mobile,
+        .nk-navbar-side {
+            width: 260px !important;
+            max-width: 90vw !important;
+        }
+    }
+    
+    /* Mobile menu backdrop/overlay */
+    .burger-menu-overlay {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background: rgba(0, 0, 0, 0.7) !important;
+        backdrop-filter: blur(3px) !important;
+        -webkit-backdrop-filter: blur(3px) !important;
+        z-index: 99998 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: opacity 0.35s ease-out, visibility 0.35s ease-out !important;
+    }
+    
+    .burger-menu-overlay.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Hide on desktop */
+    @media (min-width: 992px) {
+        #nk-nav-mobile,
+        .burger-menu-overlay {
+            display: none !important;
+        }
+    }
+    
+    /* Ensure mobile side navbar links are visible on dark background */
+    .nk-navbar-side .nk-nav {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .nk-navbar-side .nk-nav > li {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    }
+    
+    .nk-navbar-side .nk-nav > li:last-child {
+        border-bottom: none !important;
+    }
+    
+    .nk-navbar-side .nk-nav > li > a {
+        color: #fff !important;
+        display: block !important;
+        padding: 18px 25px !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        border: none !important;
+        background: transparent !important;
+        width: 100% !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+    
+    body.lang-en .nk-navbar-side .nk-nav > li > a {
+        text-align: left !important;
+        direction: ltr !important;
+    }
+    
+    .nk-navbar-side .nk-nav > li > a:hover,
+    .nk-navbar-side .nk-nav > li.active > a {
+        background: rgba(230, 57, 70, 0.15) !important;
+        color: #e63946 !important;
+        padding-right: 30px !important;
+    }
+    
+    body.lang-en .nk-navbar-side .nk-nav > li > a:hover,
+    body.lang-en .nk-navbar-side .nk-nav > li.active > a {
+        padding-right: 25px !important;
+        padding-left: 30px !important;
+    }
+    
+    .nk-navbar-mobile-content {
+        padding: 20px 0 !important;
+    }
+    
+    .nk-navbar-mobile-content .nk-nav { 
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    /* Mobile menu overlay */
+    .nk-navbar-overlay-content {
+        box-shadow: -5px 0 30px rgba(0,0,0,0.5) !important;
+    }
+    
+    body.lang-en .nk-navbar-overlay-content {
+        box-shadow: 5px 0 30px rgba(0,0,0,0.5) !important;
+    }
+    
+    /* Backdrop overlay when menu is open */
+    .mobile-menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        z-index: 1099;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    visibility 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .mobile-menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    /* Language dropdown styles */
+    /* ========================================
+       LANGUAGE DROPDOWN - SMOOTH ANIMATION
+       ======================================== */
+    .lang-dropdown { 
+        position: relative;
+        display: inline-block;
+    }
+    
+    .lang-dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 6px 0;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+        min-width: 100px;
+        list-style: none;
+        margin: 0;
+        z-index: 10000;
+        
+        /* Smooth animation */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.95);
+        transform-origin: top right;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+    }
+    
+    /* Arrow/pointer at top */
+    .lang-dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: 15px;
+        width: 12px;
+        height: 12px;
+        background: #1a1a1a;
+        border-left: 1px solid rgba(255,255,255,0.1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        transform: rotate(45deg);
+    }
+    
+    /* Show state with smooth animation */
+    .lang-dropdown-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+    
+    .lang-dropdown-menu li { 
+        padding: 0;
+        margin: 0;
+    }
+    
+    .lang-dropdown-menu .lang-option {
+        background: transparent;
+        border: none;
+        color: #fff;
+        width: 100%;
+        text-align: center;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Hover effect with slide */
+    .lang-dropdown-menu .lang-option::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(230, 57, 70, 0.2) 0%, transparent 100%);
+        transition: width 0.3s ease;
+    }
+    
+    .lang-dropdown-menu .lang-option:hover::before {
+        width: 100%;
+    }
+    
+    .lang-dropdown-menu .lang-option:hover {
+        color: #e63946;
+    }
+    
+    body.lang-en .lang-dropdown-menu .lang-option {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    body.lang-en .lang-dropdown-menu .lang-option::before {
+        left: auto;
+        right: 0;
+        background: linear-gradient(-90deg, rgba(230, 57, 70, 0.2) 0%, transparent 100%);
+    }
+    
+    body.lang-en .lang-dropdown-menu .lang-option:hover {
+        color: #e63946;
+    }
+    
+    /* Active/selected state */
+    .lang-dropdown-menu .lang-option.active { 
+        background: rgba(230, 57, 70, 0.15);
+        color: #e63946;
+        font-weight: 600;
+    }
+    
+    .lang-dropdown-menu .lang-option.active::after {
+        content: "✓";
+        color: #e63946;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    
+    body.lang-en .lang-dropdown-menu .lang-option.active::after {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    /* Divider between options */
+    .lang-dropdown-menu li:not(:last-child) {
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    </style>
+
+    <!-- Language Switch Script -->
+    <script>
+    // Comprehensive Translation Dictionary
+    // Maps Arabic text to English text
+    const arToEn = {
+    // Navigation
+    'الصفحة الرئيسية': 'Home',
+    'الألعاب': 'Games',
+    'جنة الالعاب': 'Games Paradise',
+    'ملفي الشخصي': 'My Profile',
+    'العب الآن': 'Play Now',
+    'ألعاب': 'Games',
+
+    // Profile Page
+    'المستخدم:': 'User:',
+    'الحالة:': 'Status:',
+    'الصلاحية:': 'Validity:',
+    'الاشتراك': 'Subscribe',
+    'إلغاء الاشتراك': 'Unsubscribe',
+
+    // Messages
+    'تم الاشتراك بنجاح! الصلاحية حتى:': 'Successfully subscribed! Validity until:',
+    'هل أنت متأكد من إلغاء الاشتراك؟': 'Are you sure you want to unsubscribe?',
+    'تم إلغاء الاشتراك بنجاح!': 'Successfully unsubscribed!',
+    'مشترك': 'Subscribed',
+    'غير مشترك': 'Not Subscribed',
+
+    // Buttons
+    'إلغاء': 'Cancel',
+    'تسجيل الدخول': 'Login',
+    'سجّل الدخول للعب هذه اللعبة': 'Login to play this game',
+
+    // Login Inputs
+    'أدخل رقم الجوال:': 'Enter mobile number:',
+    '987654321': 'Example: 9876543210',
+
+    // Game Names
+    'شاحنة الإطفاء': 'Fire Truck',
+    'عشيرة الساموراي': 'Samurai Clan',
+    'لعبة الغابات': 'Forest Game',
+    'زحمة الدوّار': 'Roundabout Rush',
+    'روح الأموات': 'Spirit of the Dead',
+    'بينغو': 'Bingo',
+    'فقاعات الديناصورات': 'Dinosaur Bubbles',
+    'خمس فواكه': 'Five Fruits',
+    'أمسك الوحش': 'Catch the Monster',
+    'الحرب الجوي 1941': 'Air War 1941',
+    'مطاردة الدب': 'Bear Chase',
+    'شيبولينو': 'Cipollino',
+    'قصة الهالويين': 'Halloween Story',
+    'صيّاد البط': 'Duck Hunter',
+    'أوقف اللعبة': 'Stop the Game',
+    'لا تخطئها': 'Don’t Miss It',
+    'رياضيات المجانين': 'Crazy Math',
+    'جنة البالونات': 'Balloon Paradise',
+    'مغامرات جاك': 'Jack Adventures',
+    'بابل': 'Bubble',
+    'الطائر المحلق': 'Flying Bird',
+    'سرعة الدراجة': 'Bike Speed',
+    'إقلب السلاح': 'Flip the Gun',
+    'وادي الألوان': 'Valley of Colors',
+    'إرفع الكرة': 'Raise the Ball',
+    'أر هوكي': 'Air Hockey',
+    'حمّى الصيد': 'Hunting Fever',
+    'دفع البيرة': 'Beer Push',
+    'حكاية الزرقة': 'Blue Tale',
+    'السباق القاتل': 'Deadly Race'
+};
+
+    
+    // Create reverse map (English to Arabic)
+    const enToAr = {};
+    for (const [ar, en] of Object.entries(arToEn)) {
+        enToAr[en] = ar;
+    }
+
+    // Initialize language from localStorage; if missing, default to Arabic
+    let currentLang = localStorage.getItem('siteLang');
+    if (!currentLang) {
+        currentLang = 'ar';
+        try { localStorage.setItem('siteLang', 'ar'); } catch(e) { /* ignore if storage blocked */ }
+    }
+    // Set the small lang button text immediately to avoid flicker
+    try {
+        const _lt = document.getElementById('langText');
+        if (_lt) _lt.textContent = currentLang === 'en' ? 'English' : 'العربية';
+    } catch(e) { /* ignore if DOM not ready */ }
+    
+    // Make toggleLanguage globally accessible
+    window.toggleLanguage = function() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        localStorage.setItem('siteLang', currentLang);
+        applyLanguage(currentLang);
+    };
+
+    // Apply language on page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            applyLanguage(currentLang);
+        });
+    } else {
+        // DOM already loaded
+        applyLanguage(currentLang);
+    }
+    
+    // Also apply on window load to catch any dynamically loaded content
+    window.addEventListener('load', function() {
+        applyLanguage(currentLang);
+    });
+
+    function applyLanguage(lang) {
+        const langText = document.getElementById('langText');
+        const langBtn = document.getElementById('langSwitch');
+        const body = document.body;
+        
+        if (!langText || !langBtn) return;
+        
+        const targetLang = lang === 'en' ? 'en' : 'ar';
+        const translationMap = targetLang === 'en' ? arToEn : enToAr;
+        
+        // Update HTML lang and dir attributes
+        const htmlElement = document.documentElement;
+        
+        if (targetLang === 'en') {
+            // Switch to English
+            langText.textContent = 'English';
+            langBtn.classList.remove('arabic');
+            langBtn.classList.add('english');
+            langBtn.title = 'التبديل إلى العربية';
+            body.setAttribute('dir', 'ltr');
+            body.classList.add('lang-en');
+            body.classList.remove('lang-ar');
+            if (htmlElement) {
+                htmlElement.setAttribute('lang', 'en');
+                htmlElement.setAttribute('dir', 'ltr');
+            }
+        } else {
+            // Switch to Arabic
+            langText.textContent = 'العربية';
+            langBtn.classList.remove('english');
+            langBtn.classList.add('arabic');
+            langBtn.title = 'Switch to English';
+            body.setAttribute('dir', 'rtl');
+            body.classList.add('lang-ar');
+            body.classList.remove('lang-en');
+            if (htmlElement) {
+                htmlElement.setAttribute('lang', 'ar');
+                htmlElement.setAttribute('dir', 'rtl');
+            }
+        }
+        
+        // Update active language in dropdown
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach(function(opt){
+            opt.classList.remove('active');
+            const optLang = opt.getAttribute('data-lang');
+            if (optLang === targetLang) {
+                opt.classList.add('active');
+            }
+        });
+        
+        // Translate all text content
+        translatePageContent(translationMap, targetLang);
+        
+        // Update mobile menu direction
+        const mobileMenu = document.getElementById('nk-nav-mobile');
+        if (mobileMenu) {
+            if (targetLang === 'en') {
+                mobileMenu.style.direction = 'ltr';
+                mobileMenu.classList.remove('lang-ar');
+                mobileMenu.classList.add('lang-en');
+            } else {
+                mobileMenu.style.direction = 'rtl';
+                mobileMenu.classList.remove('lang-en');
+                mobileMenu.classList.add('lang-ar');
+            }
+        }
+        
+        // Dispatch language change event for other components (e.g., cookie alert)
+        // Dispatch both native and jQuery events for compatibility
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: targetLang } }));
+        if (window.jQuery) {
+            window.jQuery(window).trigger('languageChanged', { lang: targetLang });
+        }
+    }
+
+    function translatePageContent(translationMap, targetLang) {
+        // Function to recursively translate text nodes
+        function translateNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                let text = node.textContent.trim();
+                if (!text) return;
+                
+                let newText = node.textContent;
+                let changed = false;
+                
+                // Check for exact matches and partial matches
+                for (const [sourceText, targetText] of Object.entries(translationMap)) {
+                    // Exact match
+                    if (text === sourceText) {
+                        node.textContent = targetText;
+                        return;
+                    }
+                    // Partial match (replace in full text)
+                    const regex = new RegExp(sourceText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                    if (regex.test(newText)) {
+                        newText = newText.replace(regex, targetText);
+                        changed = true;
+                    }
+                }
+                
+                if (changed) {
+                    node.textContent = newText;
+                }
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                // Skip script, style, and iframe tags
+                if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'IFRAME') {
+                    return;
+                }
+                // Translate child nodes
+                for (let child of node.childNodes) {
+                    translateNode(child);
+                }
+            }
+        }
+
+        // Translate the entire body
+        translateNode(document.body);
+        
+        // Also update specific elements that might be missed
+        updateSpecificElements(translationMap, targetLang);
+    }
+
+    function updateSpecificElements(translationMap, targetLang) {
+        // Update navigation links
+        const navLinks = document.querySelectorAll('.nk-nav a, .profile-link-btn, .nk-btn');
+        navLinks.forEach(link => {
+            const text = link.textContent.trim();
+            for (const [sourceText, targetText] of Object.entries(translationMap)) {
+                if (text === sourceText) {
+                    link.textContent = targetText;
+                    break;
+                }
+            }
+        });
+
+        // Update headings
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headings.forEach(heading => {
+            const text = heading.textContent.trim();
+            for (const [sourceText, targetText] of Object.entries(translationMap)) {
+                if (text === sourceText) {
+                    heading.textContent = targetText;
+                    break;
+                }
+            }
+        });
+
+        // Update labels
+        const labels = document.querySelectorAll('label');
+        labels.forEach(label => {
+            const text = label.textContent.trim();
+            for (const [sourceText, targetText] of Object.entries(translationMap)) {
+                if (text === sourceText) {
+                    label.textContent = targetText;
+                    break;
+                }
+            }
+        });
+
+        // Update buttons
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            const text = button.textContent.trim();
+            for (const [sourceText, targetText] of Object.entries(translationMap)) {
+                if (text === sourceText) {
+                    button.textContent = targetText;
+                    break;
+                }
+            }
+        });
+    }
+
+    // Make applyLanguage globally accessible for other scripts
+    window.applyLanguage = applyLanguage;
+    window.currentLang = currentLang;
+    </script>
+
+    <script>
+    // After mobile nav is populated by initNavbar, make sure any desktop-only helper classes
+    // don't hide items in the mobile nav (remove d-none if present)
+    (function(){
+        try {
+            document.addEventListener('DOMContentLoaded', function(){
+                var mobileNav = document.querySelector('#nk-nav-mobile .nk-navbar-mobile-content > ul.nk-nav');
+                if (mobileNav) {
+                    mobileNav.querySelectorAll('.d-none').forEach(function(el){
+                        el.classList.remove('d-none');
+                    });
+                }
+            });
+        } catch(e) { /* ignore */ }
+    })();
+    </script>
+
+    <script>
+    // Language dropdown behavior and selection
+    (function(){
+        const langBtn = document.getElementById('langSwitch');
+        const langMenu = document.getElementById('langMenu');
+        const langOptions = document.querySelectorAll('.lang-option');
+
+        if (!langBtn || !langMenu) return;
+        
+        const langDropdown = langBtn.closest('.lang-dropdown');
+
+        function closeMenu() {
+            langMenu.classList.remove('show');
+            langMenu.setAttribute('aria-hidden', 'true');
+            langBtn.setAttribute('aria-expanded','false');
+            if (langDropdown) langDropdown.classList.remove('open');
+        }
+
+        function openMenu() {
+            langMenu.classList.add('show');
+            langMenu.setAttribute('aria-hidden', 'false');
+            langBtn.setAttribute('aria-expanded','true');
+            if (langDropdown) langDropdown.classList.add('open');
+            updateActiveLanguage();
+        }
+
+        function updateActiveLanguage() {
+            // Remove active class from all options
+            langOptions.forEach(function(opt){
+                opt.classList.remove('active');
+            });
+            // Add active class to current language
+            langOptions.forEach(function(opt){
+                const lang = opt.getAttribute('data-lang');
+                if (lang === currentLang) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+
+        langBtn.addEventListener('click', function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            if (langMenu.classList.contains('show')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Clicking an option sets language
+        langOptions.forEach(function(opt){
+            opt.addEventListener('click', function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                if (lang && lang !== currentLang) {
+                    currentLang = lang === 'en' ? 'en' : 'ar';
+                    localStorage.setItem('siteLang', currentLang);
+                    if (window.applyLanguage) {
+                        window.applyLanguage(currentLang);
+                    }
+                    updateActiveLanguage();
+                }
+                closeMenu();
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function(e){
+            if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Close on escape
+        document.addEventListener('keydown', function(e){ 
+            if (e.key === 'Escape') closeMenu(); 
+        });
+
+        // Initialize active language on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(updateActiveLanguage, 100);
+            });
+        } else {
+            setTimeout(updateActiveLanguage, 100);
+        }
+    })();
+    </script>
+
+</header>
+
+<script>
+// ==========================================
+// BURGER MENU - COMPLETE REWRITE
+// Slides from LEFT with smooth animation
+// ==========================================
+(function() {
+    var isMenuOpen = false;
+    var burgerBtn = null;
+    var mobileMenu = null;
+    var overlay = null;
+    
+    function createOverlay() {
+        // Remove any existing overlay
+        var existing = document.querySelector('.burger-menu-overlay');
+        if (existing) existing.remove();
+        
+        // Create new overlay
+        overlay = document.createElement('div');
+        overlay.className = 'burger-menu-overlay';
+        overlay.id = 'burgerOverlay';
+        document.body.appendChild(overlay);
+        
+        // Close on overlay click
+        overlay.addEventListener('click', closeMenu);
+        
+        return overlay;
+    }
+    
+    function openMenu() {
+        if (!mobileMenu || isMenuOpen) return;
+        
+        isMenuOpen = true;
+        
+        // Show overlay
+        if (overlay) {
+            overlay.classList.add('active');
+        }
+        
+        // Open menu - add class for CSS transition
+        mobileMenu.classList.add('menu-open');
+        
+        // Animate burger icon to X
+        if (burgerBtn) {
+            burgerBtn.classList.add('active');
+        }
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+    }
+    
+    function closeMenu() {
+        if (!mobileMenu || !isMenuOpen) return;
+        
+        isMenuOpen = false;
+        
+        // Hide overlay
+        if (overlay) {
+            overlay.classList.remove('active');
+        }
+        
+        // Close menu
+        mobileMenu.classList.remove('menu-open');
+        
+        // Reset burger icon
+        if (burgerBtn) {
+            burgerBtn.classList.remove('active');
+        }
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+    }
+    
+    function toggleMenu(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        if (isMenuOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+    
+    function populateMenu() {
+        if (!mobileMenu) return;
+        
+        var menuContent = mobileMenu.querySelector('.nk-navbar-mobile-content .nk-nav');
+        if (!menuContent) {
+            // Create menu structure if it doesn't exist
+            var content = mobileMenu.querySelector('.nk-navbar-mobile-content');
+            if (!content) {
+                content = document.createElement('div');
+                content.className = 'nk-navbar-mobile-content';
+                mobileMenu.appendChild(content);
+            }
+            menuContent = document.createElement('ul');
+            menuContent.className = 'nk-nav';
+            content.appendChild(menuContent);
+        }
+        
+        // If empty, populate with menu items
+        if (menuContent.children.length === 0) {
+            var currentLang = localStorage.getItem('siteLang') || 'ar';
+            var isArabic = currentLang === 'ar';
+            
+            var menuItems = [
+                { href: 'index.html', textAr: 'الصفحة الرئيسية', textEn: 'Home', active: window.location.pathname.includes('index') || window.location.pathname === '/' },
+                { href: 'page-html-games.html', textAr: 'الألعاب', textEn: 'Games', active: window.location.pathname.includes('page-html-games') }
+            ];
+            
+            menuItems.forEach(function(item) {
+                var li = document.createElement('li');
+                if (item.active) li.className = 'active';
+                
+                var a = document.createElement('a');
+                a.href = item.href;
+                a.textContent = isArabic ? item.textAr : item.textEn;
+                a.addEventListener('click', function() {
+                    setTimeout(closeMenu, 150);
+                });
+                
+                li.appendChild(a);
+                menuContent.appendChild(li);
+            });
+        }
+        
+        // Add click handlers to all links
+        var links = mobileMenu.querySelectorAll('a');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                setTimeout(closeMenu, 150);
+            });
+        });
+    }
+    
+    function initBurgerMenu() {
+        // Get elements
+        burgerBtn = document.getElementById('burgerMenuBtn');
+        mobileMenu = document.getElementById('nk-nav-mobile');
+        
+        if (!burgerBtn) {
+            console.warn('Burger button not found');
+            return;
+        }
+        
+        if (!mobileMenu) {
+            console.warn('Mobile menu not found');
+            return;
+        }
+        
+        // Create overlay
+        overlay = createOverlay();
+        
+        // Populate menu
+        populateMenu();
+        
+        // Remove any classes that might interfere
+        mobileMenu.classList.remove('d-lg-none', 'nk-navbar-right-side');
+        mobileMenu.classList.add('nk-navbar-left-side');
+        
+        // Set initial state
+        mobileMenu.classList.remove('menu-open', 'open');
+        
+        // Button click handler
+        burgerBtn.onclick = toggleMenu;
+        
+        // Touch handler for mobile
+        burgerBtn.ontouchend = function(e) {
+            e.preventDefault();
+            toggleMenu(e);
+        };
+        
+        // Escape key to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                closeMenu();
+            }
+        });
+        
+        // Update direction based on language
+        function updateDirection() {
+            var currentLang = localStorage.getItem('siteLang') || 'ar';
+            if (currentLang === 'en') {
+                mobileMenu.style.direction = 'ltr';
+                document.body.classList.remove('lang-ar');
+                document.body.classList.add('lang-en');
+            } else {
+                mobileMenu.style.direction = 'rtl';
+                document.body.classList.remove('lang-en');
+                document.body.classList.add('lang-ar');
+            }
+        }
+        
+        updateDirection();
+        window.addEventListener('languageChanged', updateDirection);
+        
+        console.log('Burger menu initialized successfully');
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBurgerMenu);
+    } else {
+        initBurgerMenu();
+    }
+    
+    // Also initialize on window load as backup
+    window.addEventListener('load', function() {
+        setTimeout(initBurgerMenu, 100);
+    });
+    
+    // Make functions globally accessible for debugging
+    window.burgerMenuToggle = toggleMenu;
+    window.burgerMenuOpen = openMenu;
+    window.burgerMenuClose = closeMenu;
+})();
+</script>

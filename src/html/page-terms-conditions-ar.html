@@ -1,0 +1,188 @@
+{% set header_text = '
+    <div class="banner-content-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px;">
+        <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Logo" class="banner-logo" style="max-width:350px; width:100%; height:auto; display:block; margin:0 auto;">
+        <h1 class="nk-title display-3 banner-title" data-ar="الشروط والأحكام" data-en="Terms and Conditions" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">الشروط والأحكام</h1>
+    </div>
+    <style>
+        .banner-content-wrapper {
+            padding: 20px;
+        }
+        .banner-logo {
+            max-width: 350px !important;
+            margin-bottom: 0 !important;
+        }
+        .banner-title {
+            margin: 0 !important;
+            padding: 0 !important;
+            color: #fff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+        }
+        @media (max-width: 768px) {
+            .banner-logo {
+                max-width: 230px !important;
+                margin-bottom: 0 !important;
+            }
+            .banner-title {
+                font-size: 2rem !important;
+            }
+            .banner-content-wrapper {
+                gap: 4px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .banner-logo {
+                max-width: 190px !important;
+                margin-bottom: 0 !important;
+            }
+            .banner-title {
+                font-size: 1.5rem !important;
+            }
+            .banner-content-wrapper {
+                gap: 3px !important;
+                padding: 15px !important;
+            }
+        }
+    </style>
+' %}
+{% set header_image = 'assets/images/banner-ar.png' %}
+{% set header_size = 'md' %}
+{% set header_visible = 6 %}
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="nk-gap-2"></div>
+        
+        <div class="terms-section">
+            <h2 class="nk-title h1 text-center" data-ar="الشروط والأحكام" data-en="Terms and Conditions">الشروط والأحكام</h2>
+            <div class="nk-gap-2"></div>
+            
+            <div class="terms-content">
+                <p class="lead text-center" data-ar="بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:" data-en="By clicking on Subscribe, you agree to the below terms and conditions:">بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:</p>
+                
+                <div class="nk-gap-1"></div>
+                
+                <ul class="terms-list">
+                    <li data-ar="سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية" data-en="You will start the paid subscription after the free period automatically">سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية</li>
+                    <li data-ar="لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت" data-en="No commitment, you can cancel your subscription at any time">لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت</li>
+                    <li data-ar="الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد" data-en="The free trial is valid only for new subscribers">الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد</li>
+                    <li data-ar="استمتع بالفترة التجريبية المجانية لمدة 24 ساعة" data-en="Enjoy your Free trial for 24 hours">استمتع بالفترة التجريبية المجانية لمدة 24 ساعة</li>
+                    <li data-ar="يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى" data-en="Please make sure that your browser is not using any 3rd-party blocking technologies and you have a healthy internet connection for swift access to the content">يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى</li>
+                    <li data-ar="من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل" data-en="By proceeding, you are accepting all Terms and Conditions of the service and agree to receive updates about your subscription on your registered mobile number">من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nk-gap-4"></div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.terms-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.terms-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.terms-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-list li {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.terms-list li:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+body.lang-ar .terms-section {
+    direction: rtl;
+    text-align: right;
+}
+
+body.lang-ar .terms-list li {
+    border-right: 4px solid #d9534f;
+    border-left: none;
+}
+
+body.lang-ar .terms-list li:hover {
+    transform: translateX(5px);
+}
+
+body.lang-en .terms-section {
+    direction: ltr;
+    text-align: left;
+}
+
+body.lang-en .terms-list li {
+    border-left: 4px solid #d9534f;
+    border-right: none;
+}
+
+body.lang-en .terms-list li:hover {
+    transform: translateX(-5px);
+}
+
+@media (max-width: 768px) {
+    .terms-section {
+        padding: 25px 20px;
+    }
+    
+    .terms-list li {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block javascript %}
+<script>
+// Translate terms page content based on language
+(function(){
+    function translateTerms() {
+        var lang = localStorage.getItem('siteLang') || 'ar';
+        var elements = document.querySelectorAll('[data-ar][data-en]');
+        
+        elements.forEach(function(el) {
+            if (lang === 'en') {
+                el.textContent = el.getAttribute('data-en');
+            } else {
+                el.textContent = el.getAttribute('data-ar');
+            }
+        });
+    }
+    
+    // Translate on page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(translateTerms, 100);
+        });
+    } else {
+        setTimeout(translateTerms, 100);
+    }
+    
+    // Translate when language changes
+    window.addEventListener('languageChanged', translateTerms);
+    if (window.jQuery) {
+        window.jQuery(window).on('languageChanged', translateTerms);
+    }
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% set header_title = 'الشروط والأحكام' %}
+{% set header_sub_title = 'Terms and Conditions' %}
+{% set header_image = 'assets/images/image-1.jpg' %}
+{% set header_size = 'sm' %}
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="nk-gap-2"></div>
+        
+        <!-- Arabic Version -->
+        <div class="terms-section" id="terms-ar">
+            <h2 class="nk-title h1 text-center">الشروط والأحكام</h2>
+            <div class="nk-gap-2"></div>
+            
+            <div class="terms-content">
+                <p class="lead text-center">بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:</p>
+                
+                <div class="nk-gap-1"></div>
+                
+                <ul class="terms-list">
+                    <li>سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية</li>
+                    <li>لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت</li>
+                    <li>الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد</li>
+                    <li>استمتع بالفترة التجريبية المجانية لمدة 24 ساعة</li>
+                    <li>يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى</li>
+                    <li>من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nk-gap-4"></div>
+        <hr class="nk-hr">
+        <div class="nk-gap-4"></div>
+        
+        <!-- English Version -->
+        <div class="terms-section" id="terms-en">
+            <h2 class="nk-title h1 text-center">Terms and Conditions</h2>
+            <div class="nk-gap-2"></div>
+            
+            <div class="terms-content">
+                <p class="lead text-center">By clicking on Subscribe, you agree to the below terms and conditions:</p>
+                
+                <div class="nk-gap-1"></div>
+                
+                <ul class="terms-list">
+                    <li>You will start the paid subscription after the free period automatically</li>
+                    <li>No commitment, you can cancel your subscription at any time</li>
+                    <li>The free trial is valid only for new subscribers</li>
+                    <li>Enjoy your Free trial for 24 hours</li>
+                    <li>Please make sure that your browser is not using any 3rd-party blocking technologies and you have a healthy internet connection for swift access to the content</li>
+                    <li>By proceeding, you are accepting all Terms and Conditions of the service and agree to receive updates about your subscription on your registered mobile number</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nk-gap-4"></div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.terms-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.terms-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.terms-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-list li {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #d9534f;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.terms-list li:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(-5px);
+}
+
+#terms-ar .terms-list li {
+    border-left: none;
+    border-right: 4px solid #d9534f;
+    text-align: right;
+    direction: rtl;
+}
+
+#terms-ar .terms-list li:hover {
+    transform: translateX(5px);
+}
+
+#terms-en {
+    text-align: left;
+    direction: ltr;
+}
+
+.nk-hr {
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 40px 0;
+}
+
+@media (max-width: 768px) {
+    .terms-section {
+        padding: 25px 20px;
+    }
+    
+    .terms-list li {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+</style>
+{% endblock %}

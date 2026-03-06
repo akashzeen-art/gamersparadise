@@ -1,0 +1,129 @@
+{% set header_text = '
+    <div class="banner-content-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px;">
+        <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Logo" class="banner-logo" style="max-width:350px; width:100%; height:auto; display:block; margin:0 auto;">
+        <h1 class="nk-title display-3 banner-title" data-ar="الشروط والأحكام" data-en="Terms and Conditions" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">Terms and Conditions</h1>
+    </div>
+    <style>
+        .banner-content-wrapper {
+            padding: 20px;
+        }
+        .banner-logo {
+            max-width: 350px !important;
+            margin-bottom: 0 !important;
+        }
+        .banner-title {
+            margin: 0 !important;
+            padding: 0 !important;
+            color: #fff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+        }
+        @media (max-width: 768px) {
+            .banner-logo {
+                max-width: 230px !important;
+                margin-bottom: 0 !important;
+            }
+            .banner-title {
+                font-size: 2rem !important;
+            }
+            .banner-content-wrapper {
+                gap: 4px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .banner-logo {
+                max-width: 190px !important;
+                margin-bottom: 0 !important;
+            }
+            .banner-title {
+                font-size: 1.5rem !important;
+            }
+            .banner-content-wrapper {
+                gap: 3px !important;
+                padding: 15px !important;
+            }
+        }
+    </style>
+' %}
+{% set header_image = 'assets/images/banner-ar.png' %}
+{% set header_size = 'md' %}
+{% set header_visible = 6 %}
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="nk-gap-2"></div>
+        
+        <div class="terms-section">
+            <h2 class="nk-title h1 text-center">Terms and Conditions</h2>
+            <div class="nk-gap-2"></div>
+            
+            <div class="terms-content">
+                <p class="lead text-center">By clicking on Subscribe, you agree to the below terms and conditions:</p>
+                
+                <div class="nk-gap-1"></div>
+                
+                <ul class="terms-list">
+                    <li>You will start the paid subscription after the free period automatically</li>
+                    <li>No commitment, you can cancel your subscription at any time</li>
+                    <li>The free trial is valid only for new subscribers</li>
+                    <li>Enjoy your Free trial for 24 hours</li>
+                    <li>Please make sure that your browser is not using any 3rd-party blocking technologies and you have a healthy internet connection for swift access to the content</li>
+                    <li>By proceeding, you are accepting all Terms and Conditions of the service and agree to receive updates about your subscription on your registered mobile number</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nk-gap-4"></div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.terms-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    direction: ltr;
+    text-align: left;
+}
+
+.terms-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.terms-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terms-list li {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #d9534f;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.terms-list li:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(-5px);
+}
+
+@media (max-width: 768px) {
+    .terms-section {
+        padding: 25px 20px;
+    }
+    
+    .terms-list li {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+</style>
+{% endblock %}
