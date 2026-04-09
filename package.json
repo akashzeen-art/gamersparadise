@@ -27,12 +27,12 @@
             "dist": "./dist",
             "deploy": "./deploy"
         },
-"browserSync": {
-  "server": {
-    "baseDir": "dist"
-  },
-  "port": 3000
-},
+        "browserSync": {
+            "server": {
+                "baseDir": "dist"
+            },
+            "port": 3000
+        },
         "php": {
             "base": "{dist}",
             "port": 8000,
@@ -124,7 +124,13 @@
                 "indentWidth": 4,
                 "outputStyle": "expanded",
                 "quietDeps": true,
-                "silenceDeprecations": ["legacy-js-api", "import", "global-builtin", "color-functions", "slash-div"]
+                "silenceDeprecations": [
+                    "legacy-js-api",
+                    "import",
+                    "global-builtin",
+                    "color-functions",
+                    "slash-div"
+                ]
             }
         },
         "html": {
@@ -248,7 +254,7 @@
         "soundmanager2": "^2.97.20170602",
         "sticky-kit": "git://github.com/leafo/sticky-kit.git#master",
         "summernote": "^0.8.18",
-        "typed.js": "^2.0.11"
+        "typed.js": "^2.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.16.7",
@@ -288,8 +294,8 @@
         "jimp": "^0.10.3",
         "lint-staged": "^12.1.5",
         "micromatch": "^4.0.4",
-        "sass": "^1.69.0",
         "npm-run-all": "^4.1.5",
+        "sass": "^1.69.0",
         "simple-git-hooks": "^2.7.0",
         "string-template": "^1.0.0",
         "stylelint": "^14.2.0",

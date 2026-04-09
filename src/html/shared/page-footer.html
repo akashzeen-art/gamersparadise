@@ -25,43 +25,8 @@
         <div class="nk-gap"></div> -->
 
         <div class="nk-footer-links">
-            <a href="page-terms-conditions-ar.html" class="link-effect terms-link-ar">الشروط والأحكام</a>
-            <a href="page-terms-conditions-en.html" class="link-effect terms-link-en" style="display:none;">Terms and Conditions</a>
+            <a href="page-terms-conditions.html" class="link-effect terms-link" data-i18n="الشروط والأحكام">الشروط والأحكام</a>
         </div>
-
-        <script>
-        // Show correct Terms link based on language
-        (function(){
-            function updateTermsLink() {
-                var lang = localStorage.getItem('siteLang') || 'ar';
-                var arLink = document.querySelector('.terms-link-ar');
-                var enLink = document.querySelector('.terms-link-en');
-                
-                if (arLink && enLink) {
-                    if (lang === 'en') {
-                        arLink.style.display = 'none';
-                        enLink.style.display = 'inline';
-                    } else {
-                        arLink.style.display = 'inline';
-                        enLink.style.display = 'none';
-                    }
-                }
-            }
-            
-            // Update on page load
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', updateTermsLink);
-            } else {
-                updateTermsLink();
-            }
-            
-            // Update when language changes
-            window.addEventListener('languageChanged', updateTermsLink);
-            if (window.jQuery) {
-                window.jQuery(window).on('languageChanged', updateTermsLink);
-            }
-        })();
-        </script>
 
         <div class="nk-gap-4"></div>
     </div>

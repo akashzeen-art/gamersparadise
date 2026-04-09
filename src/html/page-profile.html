@@ -3,7 +3,7 @@
 {% set header_text = '
     <div class="banner-content-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px;">
         <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Logo" class="banner-logo" style="max-width:350px; width:100%; height:auto; display:block; margin:0 auto;">
-        <h1 class="nk-title display-3 banner-title" data-translate-key="جنة الالعاب" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">جنة الالعاب</h1>
+        <h1 class="nk-title display-3 banner-title" data-i18n="جنة الالعاب" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">جنة الالعاب</h1>
     </div>
     <style>
         .banner-content-wrapper { padding: 20px; gap: 5px; }
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="nk-gap-6"></div>
 
-        <h2 class="text-center" style="color:#fff; margin-bottom:40px;">ملفي الشخصي</h2>
+        <h2 class="text-center" style="color:#fff; margin-bottom:40px;"><span data-i18n="ملفي الشخصي">ملفي الشخصي</span></h2>
         <div class="nk-gap-3"></div>
 
         <!-- Profile Card -->
@@ -34,7 +34,7 @@
                     <!-- User Field -->
                     <div class="profile-field" style="margin-bottom:30px;">
                         <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
-                            المستخدم:
+                            <span data-i18n="المستخدم:">المستخدم:</span>
                         </label>
                         <input type="text" id="userField" class="profile-input" 
                                placeholder="......................." 
@@ -46,7 +46,7 @@
                     <!-- Status Field -->
                     <div class="profile-field" style="margin-bottom:30px;">
                         <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
-                            الحالة:
+                            <span data-i18n="الحالة:">الحالة:</span>
                         </label>
                         <input type="text" id="statusField" class="profile-input" 
                                placeholder="...................." 
@@ -58,7 +58,7 @@
                     <!-- Validity Field -->
                     <div class="profile-field" style="margin-bottom:30px;">
                         <label style="color:#fff; font-size:18px; font-weight:bold; margin-bottom:10px; display:block; direction:rtl;">
-                            الصلاحية:
+                            <span data-i18n="الصلاحية:">الصلاحية:</span>
                         </label>
                         <input type="text" id="validityField" class="profile-input" 
                                placeholder="...................." 
@@ -74,7 +74,7 @@
                                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(220,53,69,0.5)';"
                                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(220,53,69,0.3)';"
                                 onclick="handleUnsubscribe()">
-                            إلغاء الاشتراك
+                            <span data-i18n="إلغاء الاشتراك">إلغاء الاشتراك</span>
                         </button>
                     </div>
 
@@ -85,7 +85,7 @@
                                 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(40,167,69,0.5)';"
                                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(40,167,69,0.3)';"
                                 onclick="handleSubscribe()">
-                            الاشتراك
+                            <span data-i18n="الاشتراك">الاشتراك</span>
                         </button>
                     </div>
 
@@ -98,34 +98,30 @@
 </div>
 
 <script>
+// Profile page translation helper - uses same maps as page-nav.html
+function t(arKey) {
+    const lang = localStorage.getItem('siteLang') || 'ar';
+    if (lang === 'ar') return arKey;
+    const maps = {
+        en: { 'مشترك': 'Subscribed', 'غير مشترك': 'Not Subscribed', 'تم الاشتراك بنجاح! الصلاحية حتى:': 'Subscribed! Valid until:', 'هل أنت متأكد من إلغاء الاشتراك؟': 'Are you sure you want to unsubscribe?', 'تم إلغاء الاشتراك بنجاح!': 'Successfully unsubscribed!' },
+        pt: { 'مشترك': 'Assinado', 'غير مشترك': 'Não Assinado', 'تم الاشتراك بنجاح! الصلاحية حتى:': 'Assinado! Válido até:', 'هل أنت متأكد من إلغاء الاشتراك؟': 'Tem certeza que deseja cancelar?', 'تم إلغاء الاشتراك بنجاح!': 'Assinatura cancelada!' },
+        pl: { 'مشترك': 'Subskrybowany', 'غير مشترك': 'Nie Subskrybowany', 'تم الاشتراك بنجاح! الصلاحية حتى:': 'Subskrybowano! Ważne do:', 'هل أنت متأكد من إلغاء الاشتراك؟': 'Czy na pewno chcesz anulować?', 'تم إلغاء الاشتراك بنجاح!': 'Subskrypcja anulowana!' },
+        cs: { 'مشترك': 'Přihlášen', 'غير مشترك': 'Nepřihlášen', 'تم الاشتراك بنجاح! الصلاحية حتى:': 'Přihlášeno! Platí do:', 'هل أنت متأكد من إلغاء الاشتراك؟': 'Opravdu chcete zrušit?', 'تم إلغاء الاشتراك بنجاح!': 'Odběr zrušen!' }
+    };
+    return (maps[lang] && maps[lang][arKey]) ? maps[lang][arKey] : arKey;
+}
+
 // Load saved profile data from localStorage
 document.addEventListener('DOMContentLoaded', function() {
-    // Load saved values
     const savedUser = localStorage.getItem('profileUser');
-    const savedStatus = localStorage.getItem('profileStatus');
+    const savedStatus = localStorage.getItem('profileStatus'); // always stored as Arabic key
     const savedValidity = localStorage.getItem('profileValidity');
     const isSubscribed = localStorage.getItem('isSubscribed') === 'true';
-    const currentLang = localStorage.getItem('siteLang') || 'ar';
 
     if (savedUser) document.getElementById('userField').value = savedUser;
-    if (savedStatus) {
-        // Translate status if needed
-        const isEnglish = currentLang === 'en';
-        if (savedStatus === 'مشترك' && isEnglish) {
-            document.getElementById('statusField').value = 'Subscribed';
-        } else if (savedStatus === 'Subscribed' && !isEnglish) {
-            document.getElementById('statusField').value = 'مشترك';
-        } else if (savedStatus === 'غير مشترك' && isEnglish) {
-            document.getElementById('statusField').value = 'Not Subscribed';
-        } else if (savedStatus === 'Not Subscribed' && !isEnglish) {
-            document.getElementById('statusField').value = 'غير مشترك';
-        } else {
-            document.getElementById('statusField').value = savedStatus;
-        }
-    }
+    if (savedStatus) document.getElementById('statusField').value = t(savedStatus);
     if (savedValidity) document.getElementById('validityField').value = savedValidity;
 
-    // Show/hide subscribe/unsubscribe buttons based on subscription status
     if (isSubscribed) {
         document.getElementById('unsubscribeContainer').style.display = 'block';
         document.getElementById('subscribeContainer').style.display = 'none';
@@ -134,101 +130,64 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('subscribeContainer').style.display = 'block';
     }
 
-    // Save values on input change
     document.getElementById('userField').addEventListener('input', function() {
         localStorage.setItem('profileUser', this.value);
-    });
-    document.getElementById('statusField').addEventListener('input', function() {
-        localStorage.setItem('profileStatus', this.value);
     });
     document.getElementById('validityField').addEventListener('input', function() {
         localStorage.setItem('profileValidity', this.value);
     });
+
+    // Re-apply language so data-i18n elements render correctly
+    if (window.applyLanguage) window.applyLanguage(localStorage.getItem('siteLang') || 'ar');
+});
+
+// Also re-apply on language change event
+window.addEventListener('languageChanged', function(e) {
+    const lang = (e.detail && e.detail.lang) || localStorage.getItem('siteLang') || 'ar';
+    // Re-translate status field display value
+    const savedStatus = localStorage.getItem('profileStatus');
+    if (savedStatus) document.getElementById('statusField').value = t(savedStatus);
 });
 
 function handleSubscribe() {
-    const currentLang = localStorage.getItem('siteLang') || 'ar';
-    const isEnglish = currentLang === 'en';
-    
-    // Set subscription status
     localStorage.setItem('isSubscribed', 'true');
-    
-    // Hide subscribe button, show unsubscribe button
     document.getElementById('subscribeContainer').style.display = 'none';
     document.getElementById('unsubscribeContainer').style.display = 'block';
-    
-    // Update status field with translation
-    const statusText = isEnglish ? 'Subscribed' : 'مشترك';
-    document.getElementById('statusField').value = statusText;
-    localStorage.setItem('profileStatus', statusText);
-    
-    // Calculate and set validity date (30 days from today)
+
+    // Always store Arabic key as canonical value
+    localStorage.setItem('profileStatus', 'مشترك');
+    document.getElementById('statusField').value = t('مشترك');
+
     const today = new Date();
     const validityDate = new Date(today);
-    validityDate.setDate(today.getDate() + 30); // Add 30 days
-    
-    // Format date as DD/MM/YYYY
-    const day = String(validityDate.getDate()).padStart(2, '0');
-    const month = String(validityDate.getMonth() + 1).padStart(2, '0');
-    const year = validityDate.getFullYear();
-    const formattedDate = `${day}/${month}/${year}`;
-    
-    // Update validity field
+    validityDate.setDate(today.getDate() + 30);
+    const formattedDate = String(validityDate.getDate()).padStart(2,'0') + '/' +
+        String(validityDate.getMonth()+1).padStart(2,'0') + '/' + validityDate.getFullYear();
+
     document.getElementById('validityField').value = formattedDate;
     localStorage.setItem('profileValidity', formattedDate);
-    
-    // Store subscription date for reference
     localStorage.setItem('subscriptionDate', today.toISOString());
-    
-    // Show translated alert message
-    const alertMsg = isEnglish 
-        ? 'Successfully subscribed! Validity until: ' + formattedDate
-        : 'تم الاشتراك بنجاح! الصلاحية حتى: ' + formattedDate;
-    alert(alertMsg);
-    
-    // Re-apply language to update page text
-    if (window.applyLanguage) {
-        window.applyLanguage(currentLang);
-    }
+
+    alert(t('تم الاشتراك بنجاح! الصلاحية حتى:') + ' ' + formattedDate);
+    if (window.applyLanguage) window.applyLanguage(localStorage.getItem('siteLang') || 'ar');
 }
 
 function handleUnsubscribe() {
-    const currentLang = localStorage.getItem('siteLang') || 'ar';
-    const isEnglish = currentLang === 'en';
-    
-    const confirmMsg = isEnglish 
-        ? 'Are you sure you want to unsubscribe?'
-        : 'هل أنت متأكد من إلغاء الاشتراك؟';
-    
-    if (confirm(confirmMsg)) {
-        // Remove subscription status
-        localStorage.setItem('isSubscribed', 'false');
-        
-        // Hide unsubscribe button, show subscribe button
-        document.getElementById('unsubscribeContainer').style.display = 'none';
-        document.getElementById('subscribeContainer').style.display = 'block';
-        
-        // Update status field with translation
-        const statusText = isEnglish ? 'Not Subscribed' : 'غير مشترك';
-        document.getElementById('statusField').value = statusText;
-        localStorage.setItem('profileStatus', statusText);
-        
-        // Clear validity field
-        document.getElementById('validityField').value = '';
-        localStorage.removeItem('profileValidity');
-        localStorage.removeItem('subscriptionDate');
-        
-        // Show translated alert message
-        const alertMsg = isEnglish 
-            ? 'Successfully unsubscribed!'
-            : 'تم إلغاء الاشتراك بنجاح!';
-        alert(alertMsg);
-        
-        // Re-apply language to update page text
-        if (window.applyLanguage) {
-            window.applyLanguage(currentLang);
-        }
-    }
+    if (!confirm(t('هل أنت متأكد من إلغاء الاشتراك؟'))) return;
+
+    localStorage.setItem('isSubscribed', 'false');
+    document.getElementById('unsubscribeContainer').style.display = 'none';
+    document.getElementById('subscribeContainer').style.display = 'block';
+
+    localStorage.setItem('profileStatus', 'غير مشترك');
+    document.getElementById('statusField').value = t('غير مشترك');
+
+    document.getElementById('validityField').value = '';
+    localStorage.removeItem('profileValidity');
+    localStorage.removeItem('subscriptionDate');
+
+    alert(t('تم إلغاء الاشتراك بنجاح!'));
+    if (window.applyLanguage) window.applyLanguage(localStorage.getItem('siteLang') || 'ar');
 }
 </script>
 

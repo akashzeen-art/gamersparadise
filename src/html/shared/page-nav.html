@@ -71,7 +71,7 @@
                 <div class="nav-logo-section" style="display:flex; align-items:center; flex-shrink:0;">
                 <a href="index.html" class="nk-nav-logo"
                         style="color:#fff; font-size:26px; font-weight:bold; text-decoration:none; white-space:nowrap;">
-                        جنة الالعاب
+                        <span data-i18n="جنة الالعاب">جنة الالعاب</span>
                 </a>
                 </div>
 
@@ -82,13 +82,13 @@
                     <li class="active">
                         <a href="index.html"
                                 style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; white-space:nowrap;">
-                            الصفحة الرئيسية
+                            <span data-i18n="الصفحة الرئيسية">الصفحة الرئيسية</span>
                         </a>
                     </li>
                     <li>
                         <a href="page-html-games.html"
                                 style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; white-space:nowrap;">
-                            الألعاب
+                            <span data-i18n="الألعاب">الألعاب</span>
                         </a>
                     </li>
                 </ul>
@@ -100,7 +100,7 @@
                     <div class="profile-link-container" style="display:flex; align-items:center;">
                         <a href="page-profile.html" class="profile-link-btn" style="color:#fff; font-size:16px; font-weight:bold; text-decoration:none; padding:8px 16px; border-radius:5px; background:linear-gradient(135deg, #333 0%, #1a1a1a 100%); border:2px solid #444; transition:all 0.3s ease; white-space:nowrap; display:flex; align-items:center; gap:5px;">
                             <span class="profile-icon">👤</span>
-                            <span class="profile-text">ملفي الشخصي</span>
+                            <span class="profile-text" data-i18n="ملفي الشخصي">ملفي الشخصي</span>
                         </a>
                     </div>
 
@@ -114,6 +114,9 @@
                             <ul class="lang-dropdown-menu" id="langMenu" role="menu" aria-hidden="true">
                                 <li role="none"><button role="menuitem" class="lang-option" data-lang="ar">العربية</button></li>
                                 <li role="none"><button role="menuitem" class="lang-option" data-lang="en">English</button></li>
+                                <li role="none"><button role="menuitem" class="lang-option" data-lang="pt">Português</button></li>
+                                <li role="none"><button role="menuitem" class="lang-option" data-lang="pl">Polski</button></li>
+                                <li role="none"><button role="menuitem" class="lang-option" data-lang="cs">Čeština</button></li>
                 </ul>
                         </div>
                     </div>
@@ -882,7 +885,16 @@
     'حمّى الصيد': 'Hunting Fever',
     'دفع البيرة': 'Beer Push',
     'حكاية الزرقة': 'Blue Tale',
-    'السباق القاتل': 'Deadly Race'
+    'السباق القاتل': 'Deadly Race',
+    'Skip': 'Skip',
+    'الشروط والأحكام': 'Terms and Conditions',
+    'بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:': 'By clicking on Subscribe, you agree to the below terms and conditions:',
+    'سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية': 'You will start the paid subscription after the free period automatically',
+    'لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت': 'No commitment, you can cancel your subscription at any time',
+    'الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد': 'The free trial is valid only for new subscribers',
+    'استمتع بالفترة التجريبية المجانية لمدة 24 ساعة': 'Enjoy your Free trial for 24 hours',
+    'يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى': 'Please make sure that your browser is not using any 3rd-party blocking technologies and you have a healthy internet connection for swift access to the content',
+    'من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل': 'By proceeding, you are accepting all Terms and Conditions of the service and agree to receive updates about your subscription on your registered mobile number',
 };
 
     
@@ -892,36 +904,220 @@
         enToAr[en] = ar;
     }
 
+    // Portuguese translations
+    const arToPt = {
+        'الصفحة الرئيسية': 'Início',
+        'الألعاب': 'Jogos',
+        'جنة الالعاب': 'Paraíso dos Jogos',
+        'ملفي الشخصي': 'Meu Perfil',
+        'العب الآن': 'Jogar Agora',
+        'ألعاب': 'Jogos',
+        'المستخدم:': 'Usuário:',
+        'الحالة:': 'Status:',
+        'الصلاحية:': 'Validade:',
+        'الاشتراك': 'Assinar',
+        'إلغاء الاشتراك': 'Cancelar Assinatura',
+        'تم الاشتراك بنجاح! الصلاحية حتى:': 'Assinado com sucesso! Válido até:',
+        'هل أنت متأكد من إلغاء الاشتراك؟': 'Tem certeza que deseja cancelar?',
+        'تم إلغاء الاشتراك بنجاح!': 'Assinatura cancelada com sucesso!',
+        'مشترك': 'Assinado',
+        'غير مشترك': 'Não Assinado',
+        'إلغاء': 'Cancelar',
+        'تسجيل الدخول': 'Entrar',
+        'سجّل الدخول للعب هذه اللعبة': 'Entre para jogar este jogo',
+        'أدخل رقم الجوال:': 'Digite o número do celular:',
+        'شاحنة الإطفاء': 'Caminhão de Bombeiros',
+        'عشيرة الساموراي': 'Clã Samurai',
+        'لعبة الغابات': 'Jogo da Floresta',
+        'زحمة الدوّار': 'Corrida na Rotatória',
+        'روح الأموات': 'Espírito dos Mortos',
+        'بينغو': 'Bingo',
+        'فقاعات الديناصورات': 'Bolhas de Dinossauro',
+        'خمس فواكه': 'Cinco Frutas',
+        'أمسك الوحش': 'Pegue o Monstro',
+        'الحرب الجوي 1941': 'Guerra Aérea 1941',
+        'مطاردة الدب': 'Caçada ao Urso',
+        'شيبولينو': 'Cipollino',
+        'قصة الهالويين': 'História do Halloween',
+        'صيّاد البط': 'Caçador de Patos',
+        'أوقف اللعبة': 'Pare o Jogo',
+        'لا تخطئها': 'Não Erre',
+        'رياضيات المجانين': 'Matemática Louca',
+        'جنة البالونات': 'Paraíso dos Balões',
+        'مغامرات جاك': 'Aventuras de Jack',
+        'بابل': 'Bolha',
+        'الطائر المحلق': 'Pássaro Voador',
+        'سرعة الدراجة': 'Velocidade da Bicicleta',
+        'إقلب السلاح': 'Vire a Arma',
+        'وادي الألوان': 'Vale das Cores',
+        'إرفع الكرة': 'Levante a Bola',
+        'أر هوكي': 'Air Hockey',
+        'حمّى الصيد': 'Febre da Caça',
+        'دفع البيرة': 'Empurra Cerveja',
+        'حكاية الزرقة': 'Conto Azul',
+        'السباق القاتل': 'Corrida Mortal',
+        'Skip': 'Pular',
+        'الشروط والأحكام': 'Termos e Condições',
+        'بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:': 'Ao clicar em Assinar, você concorda com os seguintes termos e condições:',
+        'سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية': 'A assinatura paga começará automaticamente após o período gratuito',
+        'لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت': 'Sem compromisso, você pode cancelar sua assinatura a qualquer momento',
+        'الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد': 'O período de teste gratuito é válido apenas para novos assinantes',
+        'استمتع بالفترة التجريبية المجانية لمدة 24 ساعة': 'Aproveite seu período de teste gratuito por 24 horas',
+        'يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى': 'Certifique-se de que seu navegador não está usando tecnologias de bloqueio de terceiros e que você tem uma boa conexão com a internet',
+        'من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل': 'Ao prosseguir, você aceita todos os Termos e Condições do serviço e concorda em receber atualizações sobre sua assinatura no número de celular registrado',
+    };
+
+    const arToPl = {
+        'الصفحة الرئيسية': 'Strona Główna',
+        'الألعاب': 'Gry',
+        'جنة الالعاب': 'Raj Graczy',
+        'ملفي الشخصي': 'Mój Profil',
+        'العب الآن': 'Graj Teraz',
+        'ألعاب': 'Gry',
+        'المستخدم:': 'Użytkownik:',
+        'الحالة:': 'Status:',
+        'الصلاحية:': 'Ważność:',
+        'الاشتراك': 'Subskrybuj',
+        'إلغاء الاشتراك': 'Anuluj Subskrypcję',
+        'تم الاشتراك بنجاح! الصلاحية حتى:': 'Subskrypcja udana! Ważna do:',
+        'هل أنت متأكد من إلغاء الاشتراك؟': 'Czy na pewno chcesz anulować?',
+        'تم إلغاء الاشتراك بنجاح!': 'Subskrypcja anulowana pomyślnie!',
+        'مشترك': 'Subskrybowany',
+        'غير مشترك': 'Nie Subskrybowany',
+        'إلغاء': 'Anuluj',
+        'تسجيل الدخول': 'Zaloguj się',
+        'سجّل الدخول للعب هذه اللعبة': 'Zaloguj się, aby grać',
+        'أدخل رقم الجوال:': 'Wprowadź numer telefonu:',
+        'شاحنة الإطفاء': 'Wóz Strażacki',
+        'عشيرة الساموراي': 'Klan Samurajów',
+        'لعبة الغابات': 'Gra w Lesie',
+        'زحمة الدوّار': 'Wyścig na Rondzie',
+        'روح الأموات': 'Duch Umarłych',
+        'بينغو': 'Bingo',
+        'فقاعات الديناصورات': 'Bańki Dinozaurów',
+        'خمس فواكه': 'Pięć Owoców',
+        'أمسك الوحش': 'Złap Potwora',
+        'الحرب الجوي 1941': 'Wojna Powietrzna 1941',
+        'مطاردة الدب': 'Pościg za Niedźwiedziem',
+        'شيبولينو': 'Cipollino',
+        'قصة الهالويين': 'Historia Halloween',
+        'صيّاد البط': 'Myśliwy na Kaczki',
+        'أوقف اللعبة': 'Zatrzymaj Grę',
+        'لا تخطئها': 'Nie Chyb',
+        'رياضيات المجانين': 'Szalona Matematyka',
+        'جنة البالونات': 'Raj Balonów',
+        'مغامرات جاك': 'Przygody Jacka',
+        'بابل': 'Bańka',
+        'الطائر المحلق': 'Latający Ptak',
+        'سرعة الدراجة': 'Prędkość Roweru',
+        'إقلب السلاح': 'Odwróć Broń',
+        'وادي الألوان': 'Dolina Kolorów',
+        'إرفع الكرة': 'Podnieś Piłkę',
+        'أر هوكي': 'Hokej Powietrzny',
+        'حمّى الصيد': 'Gorączka Polowania',
+        'دفع البيرة': 'Pchanie Piwa',
+        'حكاية الزرقة': 'Niebieska Opowieść',
+        'السباق القاتل': 'Śmiertelny Wyścig',
+        'Skip': 'Pomiń',
+        'الشروط والأحكام': 'Regulamin',
+        'بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:': 'Klikając Subskrybuj, zgadzasz się na poniższe warunki:',
+        'سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية': 'Płatna subskrypcja rozpocznie się automatycznie po zakończeniu okresu bezpłatnego',
+        'لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت': 'Brak zobowiązań, możesz anulować subskrypcję w dowolnym momencie',
+        'الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد': 'Bezpłatny okres próbny jest ważny tylko dla nowych subskrybentów',
+        'استمتع بالفترة التجريبية المجانية لمدة 24 ساعة': 'Ciesz się bezpłatnym okresem próbnym przez 24 godziny',
+        'يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى': 'Upewnij się, że Twoja przeglądarka nie używa technologii blokujących innych firm i masz dobre połączenie z internetem',
+        'من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل': 'Kontynuując, akceptujesz wszystkie Warunki korzystania z usługi i zgadzasz się na otrzymywanie aktualizacji dotyczących subskrypcji',
+    };
+
     // Initialize language from localStorage; if missing, default to Arabic
     let currentLang = localStorage.getItem('siteLang');
     if (!currentLang) {
         currentLang = 'ar';
         try { localStorage.setItem('siteLang', 'ar'); } catch(e) { /* ignore if storage blocked */ }
     }
+
+    const arToCs = {
+        'الصفحة الرئيسية': 'Domů',
+        'الألعاب': 'Hry',
+        'جنة الالعاب': 'Ráj Hráčů',
+        'ملفي الشخصي': 'Můj Profil',
+        'العب الآن': 'Hrát Nyní',
+        'ألعاب': 'Hry',
+        'المستخدم:': 'Uživatel:',
+        'الحالة:': 'Stav:',
+        'الصلاحية:': 'Platnost:',
+        'الاشتراك': 'Přihlásit se k odběru',
+        'إلغاء الاشتراك': 'Zrušit odběr',
+        'تم الاشتراك بنجاح! الصلاحية حتى:': 'Úspěšně přihlášen! Platí do:',
+        'هل أنت متأكد من إلغاء الاشتراك؟': 'Opravdu chcete zrušit odběr?',
+        'تم إلغاء الاشتراك بنجاح!': 'Odběr úspěšně zrušen!',
+        'مشترك': 'Přihlášen',
+        'غير مشترك': 'Nepřihlášen',
+        'إلغاء': 'Zrušit',
+        'تسجيل الدخول': 'Přihlásit se',
+        'سجّل الدخول للعب هذه اللعبة': 'Přihlaste se pro hraní',
+        'أدخل رقم الجوال:': 'Zadejte číslo telefonu:',
+        'شاحنة الإطفاء': 'Hasičský Vůz',
+        'عشيرة الساموراي': 'Klan Samurajů',
+        'لعبة الغابات': 'Hra v Lese',
+        'زحمة الدوّار': 'Závod na Kruhovém Objezdu',
+        'روح الأموات': 'Duch Mrtvých',
+        'بينغو': 'Bingo',
+        'فقاعات الديناصورات': 'Dinosauří Bubliny',
+        'خمس فواكه': 'Pět Ovoce',
+        'أمسك الوحش': 'Chyť Příšeru',
+        'الحرب الجوي 1941': 'Vzdušná Válka 1941',
+        'مطاردة الدب': 'Honba za Medvědem',
+        'شيبولينو': 'Cipollino',
+        'قصة الهالويين': 'Halloweenský Příběh',
+        'صيّاد البط': 'Lovec Kachen',
+        'أوقف اللعبة': 'Zastav Hru',
+        'لا تخطئها': 'Neminout',
+        'رياضيات المجانين': 'Bláznivá Matematika',
+        'جنة البالونات': 'Ráj Balónků',
+        'مغامرات جاك': 'Jackova Dobrodružství',
+        'بابل': 'Bublina',
+        'الطائر المحلق': 'Létající Pták',
+        'سرعة الدراجة': 'Rychlost Kola',
+        'إقلب السلاح': 'Otočit Zbraň',
+        'وادي الألوان': 'Údolí Barev',
+        'إرفع الكرة': 'Zvedni Míč',
+        'أر هوكي': 'Vzdušný Hokej',
+        'حمّى الصيد': 'Lovecká Horečka',
+        'دفع البيرة': 'Tlačení Piva',
+        'حكاية الزرقة': 'Modrý Příběh',
+        'السباق القاتل': 'Smrtelný Závod',
+        'Skip': 'Přeskočit',
+        'الشروط والأحكام': 'Obchodní podmínky',
+        'بالنقر على الاشتراك، فإنك توافق على الشروط والأحكام التالية:': 'Kliknutím na Přihlásit se souhlasíte s následujícími podmínkami:',
+        'سيبدأ الاشتراك المدفوع تلقائيًا بعد انتهاء الفترة المجانية': 'Placené předplatné začne automaticky po skončení bezplatného období',
+        'لا يوجد التزام، يمكنك إلغاء اشتراكك في أي وقت': 'Žádný závazek, předplatné můžete kdykoli zrušit',
+        'الفترة التجريبية المجانية صالحة فقط للمشتركين الجدد': 'Bezplatná zkušební verze je platná pouze pro nové předplatitele',
+        'استمتع بالفترة التجريبية المجانية لمدة 24 ساعة': 'Užijte si bezplatnou zkušební verzi po dobu 24 hodin',
+        'يرجى التأكد من أن متصفحك لا يستخدم أي تقنيات حظر من طرف ثالث وأن لديك اتصال إنترنت جيد للوصول السريع إلى المحتوى': 'Ujistěte se, že váš prohlížeč nepoužívá žádné blokovací technologie třetích stran a máte dobré připojení k internetu',
+        'من خلال المتابعة، فإنك تقبل جميع الشروط والأحكام الخاصة بالخدمة وتوافق على تلقي تحديثات حول اشتراكك على رقم هاتفك المحمول المسجل': 'Pokračováním přijímáte všechny Obchodní podmínky služby a souhlasíte s přijímáním aktualizací o vašem předplatném',
+    };
+
+    const langLabels = { ar: 'العربية', en: 'English', pt: 'Português', pl: 'Polski', cs: 'Čeština' };
+
     // Set the small lang button text immediately to avoid flicker
     try {
         const _lt = document.getElementById('langText');
-        if (_lt) _lt.textContent = currentLang === 'en' ? 'English' : 'العربية';
+        if (_lt) _lt.textContent = langLabels[currentLang] || 'العربية';
     } catch(e) { /* ignore if DOM not ready */ }
     
-    // Make toggleLanguage globally accessible
-    window.toggleLanguage = function() {
-        currentLang = currentLang === 'ar' ? 'en' : 'ar';
-        localStorage.setItem('siteLang', currentLang);
-        applyLanguage(currentLang);
-    };
-
     // Apply language on page load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            applyLanguage(currentLang);
-        });
-    } else {
-        // DOM already loaded
+    function initLang() {
         applyLanguage(currentLang);
+        initLangDropdown();
     }
-    
-    // Also apply on window load to catch any dynamically loaded content
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLang);
+    } else {
+        initLang();
+    }
+
     window.addEventListener('load', function() {
         applyLanguage(currentLang);
     });
@@ -933,38 +1129,27 @@
         
         if (!langText || !langBtn) return;
         
-        const targetLang = lang === 'en' ? 'en' : 'ar';
-        const translationMap = targetLang === 'en' ? arToEn : enToAr;
+        const validLangs = ['ar', 'en', 'pt', 'pl', 'cs'];
+        const targetLang = validLangs.includes(lang) ? lang : 'ar';
+        
+        // Pick translation map: always translate FROM Arabic keys
+        const maps = { en: arToEn, pt: arToPt, pl: arToPl, cs: arToCs };
+        const translationMap = maps[targetLang] || null; // null = Arabic (show original)
         
         // Update HTML lang and dir attributes
         const htmlElement = document.documentElement;
+        const isRTL = targetLang === 'ar';
         
-        if (targetLang === 'en') {
-            // Switch to English
-            langText.textContent = 'English';
-            langBtn.classList.remove('arabic');
-            langBtn.classList.add('english');
-            langBtn.title = 'التبديل إلى العربية';
-            body.setAttribute('dir', 'ltr');
-            body.classList.add('lang-en');
-            body.classList.remove('lang-ar');
-            if (htmlElement) {
-                htmlElement.setAttribute('lang', 'en');
-                htmlElement.setAttribute('dir', 'ltr');
-            }
-        } else {
-            // Switch to Arabic
-            langText.textContent = 'العربية';
-            langBtn.classList.remove('english');
-            langBtn.classList.add('arabic');
-            langBtn.title = 'Switch to English';
-            body.setAttribute('dir', 'rtl');
-            body.classList.add('lang-ar');
-            body.classList.remove('lang-en');
-            if (htmlElement) {
-                htmlElement.setAttribute('lang', 'ar');
-                htmlElement.setAttribute('dir', 'rtl');
-            }
+        langText.textContent = langLabels[targetLang] || 'العربية';
+        langBtn.classList.toggle('arabic', isRTL);
+        langBtn.classList.toggle('english', !isRTL);
+        langBtn.title = isRTL ? 'Switch Language' : 'تغيير اللغة';
+        body.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        body.classList.toggle('lang-ar', isRTL);
+        body.classList.toggle('lang-en', !isRTL);
+        if (htmlElement) {
+            htmlElement.setAttribute('lang', targetLang);
+            htmlElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
         }
         
         // Update active language in dropdown
@@ -977,8 +1162,8 @@
             }
         });
         
-        // Translate all text content
-        translatePageContent(translationMap, targetLang);
+        // Translate all [data-i18n] elements using Arabic key as source of truth
+        translateByKeys(translationMap);
         
         // Update mobile menu direction
         const mobileMenu = document.getElementById('nk-nav-mobile');
@@ -1002,214 +1187,78 @@
         }
     }
 
-    function translatePageContent(translationMap, targetLang) {
-        // Function to recursively translate text nodes
-        function translateNode(node) {
-            if (node.nodeType === Node.TEXT_NODE) {
-                let text = node.textContent.trim();
-                if (!text) return;
-                
-                let newText = node.textContent;
-                let changed = false;
-                
-                // Check for exact matches and partial matches
-                for (const [sourceText, targetText] of Object.entries(translationMap)) {
-                    // Exact match
-                    if (text === sourceText) {
-                        node.textContent = targetText;
-                        return;
-                    }
-                    // Partial match (replace in full text)
-                    const regex = new RegExp(sourceText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-                    if (regex.test(newText)) {
-                        newText = newText.replace(regex, targetText);
-                        changed = true;
-                    }
-                }
-                
-                if (changed) {
-                    node.textContent = newText;
-                }
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-                // Skip script, style, and iframe tags
-                if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'IFRAME') {
-                    return;
-                }
-                // Translate child nodes
-                for (let child of node.childNodes) {
-                    translateNode(child);
-                }
-            }
-        }
-
-        // Translate the entire body
-        translateNode(document.body);
-        
-        // Also update specific elements that might be missed
-        updateSpecificElements(translationMap, targetLang);
-    }
-
-    function updateSpecificElements(translationMap, targetLang) {
-        // Update navigation links
-        const navLinks = document.querySelectorAll('.nk-nav a, .profile-link-btn, .nk-btn');
-        navLinks.forEach(link => {
-            const text = link.textContent.trim();
-            for (const [sourceText, targetText] of Object.entries(translationMap)) {
-                if (text === sourceText) {
-                    link.textContent = targetText;
-                    break;
-                }
-            }
-        });
-
-        // Update headings
-        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        headings.forEach(heading => {
-            const text = heading.textContent.trim();
-            for (const [sourceText, targetText] of Object.entries(translationMap)) {
-                if (text === sourceText) {
-                    heading.textContent = targetText;
-                    break;
-                }
-            }
-        });
-
-        // Update labels
-        const labels = document.querySelectorAll('label');
-        labels.forEach(label => {
-            const text = label.textContent.trim();
-            for (const [sourceText, targetText] of Object.entries(translationMap)) {
-                if (text === sourceText) {
-                    label.textContent = targetText;
-                    break;
-                }
-            }
-        });
-
-        // Update buttons
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            const text = button.textContent.trim();
-            for (const [sourceText, targetText] of Object.entries(translationMap)) {
-                if (text === sourceText) {
-                    button.textContent = targetText;
-                    break;
-                }
-            }
+    // Key-based translation: reads data-i18n="Arabic key", always translates from that key
+    function translateByKeys(translationMap) {
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            const key = el.getAttribute('data-i18n');
+            if (!key) return;
+            // If no map (Arabic mode), restore original Arabic text
+            el.textContent = (translationMap && translationMap[key]) ? translationMap[key] : key;
         });
     }
 
-    // Make applyLanguage globally accessible for other scripts
-    window.applyLanguage = applyLanguage;
-    window.currentLang = currentLang;
-    </script>
-
-    <script>
-    // After mobile nav is populated by initNavbar, make sure any desktop-only helper classes
-    // don't hide items in the mobile nav (remove d-none if present)
-    (function(){
-        try {
-            document.addEventListener('DOMContentLoaded', function(){
-                var mobileNav = document.querySelector('#nk-nav-mobile .nk-navbar-mobile-content > ul.nk-nav');
-                if (mobileNav) {
-                    mobileNav.querySelectorAll('.d-none').forEach(function(el){
-                        el.classList.remove('d-none');
-                    });
-                }
-            });
-        } catch(e) { /* ignore */ }
-    })();
-    </script>
-
-    <script>
-    // Language dropdown behavior and selection
-    (function(){
+    function initLangDropdown() {
         const langBtn = document.getElementById('langSwitch');
         const langMenu = document.getElementById('langMenu');
-        const langOptions = document.querySelectorAll('.lang-option');
-
         if (!langBtn || !langMenu) return;
-        
+
         const langDropdown = langBtn.closest('.lang-dropdown');
 
         function closeMenu() {
             langMenu.classList.remove('show');
             langMenu.setAttribute('aria-hidden', 'true');
-            langBtn.setAttribute('aria-expanded','false');
+            langBtn.setAttribute('aria-expanded', 'false');
             if (langDropdown) langDropdown.classList.remove('open');
         }
 
         function openMenu() {
             langMenu.classList.add('show');
             langMenu.setAttribute('aria-hidden', 'false');
-            langBtn.setAttribute('aria-expanded','true');
+            langBtn.setAttribute('aria-expanded', 'true');
             if (langDropdown) langDropdown.classList.add('open');
-            updateActiveLanguage();
         }
 
-        function updateActiveLanguage() {
-            // Remove active class from all options
-            langOptions.forEach(function(opt){
-                opt.classList.remove('active');
-            });
-            // Add active class to current language
-            langOptions.forEach(function(opt){
-                const lang = opt.getAttribute('data-lang');
-                if (lang === currentLang) {
-                    opt.classList.add('active');
-                }
-            });
-        }
-
-        langBtn.addEventListener('click', function(e){
+        langBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             e.preventDefault();
-            if (langMenu.classList.contains('show')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+            langMenu.classList.contains('show') ? closeMenu() : openMenu();
         });
 
-        // Clicking an option sets language
-        langOptions.forEach(function(opt){
-            opt.addEventListener('click', function(e){
+        langMenu.querySelectorAll('.lang-option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 const lang = this.getAttribute('data-lang');
-                if (lang && lang !== currentLang) {
-                    currentLang = lang === 'en' ? 'en' : 'ar';
+                if (lang) {
+                    currentLang = lang;
                     localStorage.setItem('siteLang', currentLang);
-                    if (window.applyLanguage) {
-                        window.applyLanguage(currentLang);
-                    }
-                    updateActiveLanguage();
+                    applyLanguage(currentLang);
                 }
                 closeMenu();
             });
         });
 
-        // Close when clicking outside
-        document.addEventListener('click', function(e){
-            if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-                closeMenu();
-            }
+        document.addEventListener('click', function(e) {
+            if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) closeMenu();
         });
 
-        // Close on escape
-        document.addEventListener('keydown', function(e){ 
-            if (e.key === 'Escape') closeMenu(); 
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
         });
+    }
 
-        // Initialize active language on page load
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(updateActiveLanguage, 100);
-            });
-        } else {
-            setTimeout(updateActiveLanguage, 100);
-        }
-    })();
+    // Make applyLanguage globally accessible
+    window.applyLanguage = applyLanguage;
+    </script>
+
+    <script>
+    // Fix mobile nav d-none classes
+    document.addEventListener('DOMContentLoaded', function(){
+        try {
+            var mobileNav = document.querySelector('#nk-nav-mobile .nk-navbar-mobile-content > ul.nk-nav');
+            if (mobileNav) mobileNav.querySelectorAll('.d-none').forEach(function(el){ el.classList.remove('d-none'); });
+        } catch(e) {}
+    });
     </script>
 
 </header>
