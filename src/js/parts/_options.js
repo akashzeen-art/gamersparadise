@@ -7,7 +7,7 @@ const options = {
     enableSearchAutofocus: true,
     enableActionLikeAnimation: true,
     enableShortcuts: true,
-    enableFadeBetweenPages: true,
+    enableFadeBetweenPages: false,
     enableMouseParallax: true,
     enableCookieAlert: false,
     scrollToAnchorSpeed: 700,

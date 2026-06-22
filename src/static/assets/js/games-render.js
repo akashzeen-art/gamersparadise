@@ -16,31 +16,70 @@
     }
 
     function getDisplayName(game, lang) {
-        if (lang === 'ar') {
-            return game.name_ar || game.name;
-        }
+        if (lang === 'ar') return game.name_ar || game.name;
         return game.name;
+    }
+
+    function buildHeroGameTile(game, lang) {
+        var displayName = getDisplayName(game, lang);
+        var safeName   = escapeHtml(displayName);
+        var safeNameEn = escapeHtml(game.name);
+        var safeNameAr = escapeHtml(game.name_ar || game.name);
+        var safeUrl    = escapeHtml(game.game_url);
+        var safeThumb  = escapeHtml(game.thumbnail_url);
+
+        return (
+            '<a href="' + safeUrl + '" class="hero-game-tile" role="listitem">' +
+                '<span class="hero-game-tile-media">' +
+                    '<img src="' + safeThumb + '" alt="' + safeName + '" loading="lazy">' +
+                    '<span class="hero-game-tile-play" aria-hidden="true">&#9654;</span>' +
+                '</span>' +
+                '<span class="hero-game-tile-name game-title" data-name-ar="' + safeNameAr + '" data-name-en="' + safeNameEn + '">' + safeName + '</span>' +
+            '</a>'
+        );
+    }
+
+    function renderHeroGames(container) {
+        if (!container) return;
+
+        var games = window.gamesData;
+        if (!Array.isArray(games)) return;
+
+        var category = container.getAttribute('data-category') || 'Top 10 Games';
+        var filtered = filterGames(games, category);
+        if (!filtered.length) filtered = games.slice();
+        var limit = resolveLimit(container, null) || 12;
+        filtered = filtered.slice(0, limit);
+
+        var lang = getCurrentLang();
+        container.innerHTML = filtered.map(function (g) {
+            return buildHeroGameTile(g, lang);
+        }).join('');
+
+        if (typeof window.initHeroGameTiles === 'function') {
+            window.initHeroGameTiles(container);
+        }
     }
 
     function buildGameCard(game, overlayClass, lang) {
         var displayName = getDisplayName(game, lang);
-        var safeName = escapeHtml(displayName);
+        var safeName   = escapeHtml(displayName);
         var safeNameEn = escapeHtml(game.name);
         var safeNameAr = escapeHtml(game.name_ar || game.name);
-        var safeUrl = escapeHtml(game.game_url);
-        var safeThumb = escapeHtml(game.thumbnail_url);
+        var safeUrl    = escapeHtml(game.game_url);
+        var safeThumb  = escapeHtml(game.thumbnail_url);
 
         return (
-            '<div class="col-md-6 col-lg-4">' +
+            '<div class="col-6 col-md-4 col-lg-3">' +
                 '<div class="nk-image-box-3">' +
                     '<a href="' + safeUrl + '" class="nk-image-box-link"></a>' +
-                    '<img src="' + safeThumb + '" alt="' + safeName + '" loading="lazy" style="width:100%;height:220px;object-fit:cover;">' +
+                    '<img src="' + safeThumb + '" alt="' + safeName + '" loading="lazy">' +
                     '<div class="' + escapeHtml(overlayClass) + '">' +
                         '<div class="nk-image-meta">' +
                             '<h3 class="mb-20 nk-image-box-title h4">' +
                                 '<span class="game-title" data-name-ar="' + safeNameAr + '" data-name-en="' + safeNameEn + '">' + safeName + '</span>' +
                             '</h3>' +
-                            '<div class="nk-btn play-now-btn"><span data-i18n="العب الآن">العب الآن</span></div>' +
+                            '<div class="nk-btn play-now-btn"><span data-i18n="\u0627\u0644\u0639\u0628 \u0627\u0644\u0622\u0646">\u0627\u0644\u0639\u0628 \u0627\u0644\u0622\u0646</span></div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -48,40 +87,26 @@
         );
     }
 
-    function filterGames(games, options) {
-        var list = games || [];
-        if (options && options.category) {
-            list = list.filter(function (game) {
-                return game.categories && game.categories.indexOf(options.category) !== -1;
-            });
-        }
-        if (options && options.filter) {
-            list = list.filter(options.filter);
-        }
-        return list;
+    function filterGames(games, category) {
+        if (!category) return games;
+        return games.filter(function (g) {
+            return g.categories && g.categories.indexOf(category) !== -1;
+        });
     }
 
     function resolveLimit(container, options) {
-        if (options && options.limit != null) {
-            return parseInt(options.limit, 10);
-        }
+        if (options && options.limit != null) return parseInt(options.limit, 10);
         var attr = container.getAttribute('data-limit');
-        if (attr != null && attr !== '') {
-            var parsed = parseInt(attr, 10);
-            if (!isNaN(parsed) && parsed > 0) {
-                return parsed;
-            }
-        }
+        if (attr) { var p = parseInt(attr, 10); if (!isNaN(p) && p > 0) return p; }
         return null;
     }
 
     function resolveOverlay(container, options) {
-        if (options && options.overlay) {
-            return options.overlay;
-        }
+        if (options && options.overlay) return options.overlay;
         return container.getAttribute('data-overlay') || 'nk-image-box-overlay nk-image-box-center';
     }
 
+    /* Public: render a single container */
     window.renderGamesGrid = function (container, options) {
         options = options || {};
         if (!container) return;
@@ -92,27 +117,19 @@
             return;
         }
 
-        var filtered = filterGames(games, options);
-        var limit = resolveLimit(container, options);
-        if (limit != null) {
-            filtered = filtered.slice(0, limit);
-        }
+        var category    = options.category || container.getAttribute('data-category') || null;
+        var filtered    = filterGames(games, category);
+        var limit       = resolveLimit(container, options);
+        if (limit != null) filtered = filtered.slice(0, limit);
 
         var overlayClass = resolveOverlay(container, options);
-        var lang = options.lang || getCurrentLang();
-        var html = filtered.map(function (game) {
-            return buildGameCard(game, overlayClass, lang);
+        var lang         = options.lang || getCurrentLang();
+        container.innerHTML = filtered.map(function (g) {
+            return buildGameCard(g, overlayClass, lang);
         }).join('');
 
-        container.innerHTML = html;
-
-        if (typeof window.initGameCards === 'function') {
-            window.initGameCards(container);
-        }
-
-        if (typeof window.applyLanguage === 'function') {
-            window.applyLanguage(getCurrentLang());
-        }
+        if (typeof window.initGameCards === 'function') window.initGameCards(container);
+        if (typeof window.applyLanguage === 'function') window.applyLanguage(getCurrentLang());
     };
 
     window.updateGameTitles = function (lang) {
@@ -120,15 +137,21 @@
         document.querySelectorAll('.game-title').forEach(function (el) {
             var nameAr = el.getAttribute('data-name-ar');
             var nameEn = el.getAttribute('data-name-en');
-            if (resolvedLang === 'ar') {
-                el.textContent = nameAr || nameEn || '';
-            } else {
-                el.textContent = nameEn || nameAr || '';
-            }
+            el.textContent = (resolvedLang === 'ar') ? (nameAr || nameEn || '') : (nameEn || nameAr || '');
         });
     };
 
+    /* Render all grids on the page: .games-grid and legacy #gamesGrid */
     function initAllGrids() {
+        document.querySelectorAll('.hero-games-scroll').forEach(function (strip) {
+            renderHeroGames(strip);
+        });
+
+        /* New category sections */
+        document.querySelectorAll('.games-grid').forEach(function (grid) {
+            window.renderGamesGrid(grid);
+        });
+        /* Legacy single grid */
         document.querySelectorAll('#gamesGrid').forEach(function (grid) {
             window.renderGamesGrid(grid);
         });

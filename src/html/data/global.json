@@ -64,8 +64,7 @@
         "video": "https://youtu.be/UkeDo1LhUqQ",
         "image": "assets/images/page-background.jpg",
         "opacity": 5,
-        "color": false,
-        "audio": "assets/mp3/purpleplanetmusic-desolation.mp3"
+        "color": false
     },
     "navigation": {
         "index.html": {

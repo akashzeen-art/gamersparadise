@@ -1,18 +1,7 @@
 {% set header_title = 'Gaming Template' %} {% set header_title_show = false %}
-{% set header_text = '
-<div class="banner-content-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px;">
-    <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Logo" class="banner-logo" style="max-width:350px; width:100%; height:auto; display:block; margin:0 auto;">
-    <h1 class="nk-title display-3 banner-title" data-i18n="جنة الالعاب" style="margin:0; padding:0; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,0.5);">جنة الالعاب</h1>
-</div>
-<style>
-    .banner-content-wrapper { padding: 20px; gap: 5px; }
-    .banner-logo { max-width: 350px !important; margin-bottom: 0 !important; }
-    .banner-title { font-size: 3rem !important; }
-    @media (max-width: 768px) { .banner-logo { max-width: 230px !important; } .banner-title { font-size: 2rem !important; } .banner-content-wrapper { gap: 4px !important; } }
-    @media (max-width: 480px) { .banner-logo { max-width: 190px !important; } .banner-title { font-size: 1.5rem !important; } .banner-content-wrapper { gap: 3px !important; padding: 15px !important; } }
-</style>
-' %} {% set header_image = 'assets/images/banner-ar.png' %} {% set header_size =
-'md' %} {% set header_visible = 6 %} {% extends 'layouts/layout-2.html' %} {%
+{% set header_text %}
+{% include "shared/hero-banner.html" %}
+{% endset %} {% set header_image = false %} {% set header_parallax = false %} {% set header_parallax_opacity = false %} {% set header_size = 'lg' %} {% set header_visible = 6 %} {% extends 'layouts/layout-2.html' %} {%
 block content %}
 <!-- START: Demos -->
 <!-- <div class="container" id="demos">
@@ -24,20 +13,73 @@ block content %}
     </div> -->
 <!-- END: Demos -->
 
-<!-- START: Demos -->
+<!-- START: Games Sections -->
 <div class="bg-dark-1 nk-box">
   <div class="container">
     <div class="nk-gap-6"></div>
 
-    <h2 class="text-center"><span data-i18n="ألعاب">ألعاب</span></h2>
-    <div class="nk-gap-3"></div>
+    <!-- Top 10 -->
+    <div class="games-section" id="section-top10">
+      <div class="games-section-header">
+        <span class="games-section-icon">&#9733;</span>
+        <h2 class="games-section-title"><span data-i18n="أفضل 10 ألعاب">أفضل 10 ألعاب</span></h2>
+      </div>
+      <div class="games-section-divider"></div>
+      <div class="row vertical-gap lg-gap games-grid" data-category="Top 10 Games" data-overlay="nk-image-box-bottom nk-image-box-overlay"></div>
+    </div>
 
-    <div id="gamesGrid" class="row vertical-gap lg-gap"></div>
+    <div class="nk-gap-6"></div>
+
+    <!-- Action -->
+    <div class="games-section" id="section-action">
+      <div class="games-section-header">
+        <span class="games-section-icon">&#9889;</span>
+        <h2 class="games-section-title"><span data-i18n="ألعاب الأكشن">ألعاب الأكشن</span></h2>
+      </div>
+      <div class="games-section-divider"></div>
+      <div class="row vertical-gap lg-gap games-grid" data-category="Action" data-overlay="nk-image-box-bottom nk-image-box-overlay"></div>
+    </div>
+
+    <div class="nk-gap-6"></div>
+
+    <!-- Puzzle -->
+    <div class="games-section" id="section-puzzle">
+      <div class="games-section-header">
+        <span class="games-section-icon">&#129504;</span>
+        <h2 class="games-section-title"><span data-i18n="ألعاب الألغاز">ألعاب الألغاز</span></h2>
+      </div>
+      <div class="games-section-divider"></div>
+      <div class="row vertical-gap lg-gap games-grid" data-category="Puzzle" data-overlay="nk-image-box-bottom nk-image-box-overlay"></div>
+    </div>
+
+    <div class="nk-gap-6"></div>
+
+    <!-- Arcade -->
+    <div class="games-section" id="section-arcade">
+      <div class="games-section-header">
+        <span class="games-section-icon">&#127918;</span>
+        <h2 class="games-section-title"><span data-i18n="ألعاب أركيد">ألعاب أركيد</span></h2>
+      </div>
+      <div class="games-section-divider"></div>
+      <div class="row vertical-gap lg-gap games-grid" data-category="Arcade" data-overlay="nk-image-box-bottom nk-image-box-overlay"></div>
+    </div>
+
+    <div class="nk-gap-6"></div>
+
+    <!-- All Games -->
+    <div class="games-section" id="section-all">
+      <div class="games-section-header">
+        <span class="games-section-icon">&#127760;</span>
+        <h2 class="games-section-title"><span data-i18n="جميع الألعاب">جميع الألعاب</span></h2>
+      </div>
+      <div class="games-section-divider"></div>
+      <div class="row vertical-gap lg-gap games-grid" data-category="All Games" data-limit="24" data-overlay="nk-image-box-bottom nk-image-box-overlay"></div>
+    </div>
 
     <div class="nk-gap-6"></div>
   </div>
 </div>
-<!-- END: Demos -->
+<!-- END: Games Sections -->
 
   <!-- START: Subscribe -->
   <!-- <div class="bg-dark-1 nk-box">

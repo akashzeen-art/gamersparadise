@@ -11,20 +11,18 @@
         .nk-header-title-parallax-opacity
         .nk-header-title-boxed
 -->
-<div class="nk-header-title{{ ' nk-header-title-' if header_size }}{{ header_size if header_size }}{{ ' nk-header-title-parallax' if header_parallax }}{{ ' nk-header-title-parallax-opacity' if header_parallax_opacity }}{{ ' nk-header-title-boxed' if header_boxed }}{{ ' ' + header_class if header_class }}">
+<div class="nk-header-title{{ ' nk-header-title-' if header_size }}{{ header_size if header_size }}{{ ' nk-header-title-parallax' if header_parallax and header_image }}{{ ' nk-header-title-parallax-opacity' if header_parallax_opacity and header_image }}{{ ' nk-header-title-boxed' if header_boxed }}{{ ' hero-animated-header' if not header_image }}{{ ' ' + header_class if header_class }}">
+    {% if header_image %}
+    <div class="hero-grid-overlay" aria-hidden="true"></div>
     <div class="bg-image{{ (' op-' + header_visible) if header_visible < 10 }}" style="background-image: url('{{ header_image }}'); background-size: cover; background-position: center center; background-repeat: no-repeat;">
-                    <style>
-                            .nk-header-title .bg-image { background-size: cover; background-position: center center; background-repeat: no-repeat; }
-                            @media (max-width: 767px) {
-                                    .nk-header-title .bg-image { background-image: url('assets/images/banner-ar.png'); }
-                            }
-                    </style>
-                    <!-- Keep picture element for accessibility / fallback -->
-                    <picture>
-                        <source srcset="assets/images/banner-ar.png" media="(max-width: 767px)">
-                        <img src="{{ header_image }}" alt="Banner">
-                    </picture>
-            </div>
+        <picture>
+            <source srcset="assets/images/banner-ar.png" media="(max-width: 767px)">
+            <img src="{{ header_image }}" alt="Banner">
+        </picture>
+    </div>
+    {% else %}
+    {% include "shared/hero-animated-bg.html" %}
+    {% endif %}
     <div class="nk-header-table">
         <div class="nk-header-table-cell">
             <div class="container">

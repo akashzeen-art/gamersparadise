@@ -91,6 +91,19 @@
         });
     };
 
+    window.initHeroGameTiles = function (root) {
+        var scope = root || document;
+
+        scope.querySelectorAll('.hero-game-tile').forEach(function (tile) {
+            if (tile.dataset.gameBound === 'true') return;
+            tile.dataset.gameBound = 'true';
+            tile.addEventListener('click', function (e) {
+                e.preventDefault();
+                openGame(tile.getAttribute('href'));
+            });
+        });
+    };
+
     function initPlayer() {
         var gameFrame = document.getElementById('gameFrame');
         var closeBtn = document.getElementById('backToHome');

@@ -25,5 +25,7 @@
         data-audio-loop - loop audio (true/false)
         data-audio-pause-on-page-leave - pause video when the page not in focus (true/false)
 -->
+{% if background.audio %}
 <div class="nk-page-background-audio d-none" data-audio="{{ background.audio }}" data-audio-volume="100" data-audio-autoplay="true" data-audio-loop="true" data-audio-pause-on-page-leave="true"></div>
+{% endif %}
 <!-- END: Page Background -->

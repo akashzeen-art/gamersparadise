@@ -1,22 +1,125 @@
 <!-- START: Page Preloader -->
 <div class="nk-preloader">
-    <div class="nk-preloader-bg"
-         style="background-color: #000;"
-         data-close-frames="23"
-         data-close-speed="1.2"
-         data-close-sprites="./assets/images/preloader-bg.png"
-         data-open-frames="23"
-         data-open-speed="1.2"
-         data-open-sprites="./assets/images/preloader-bg-bw.png">
+    <div class="nk-preloader-bg" style="background-color: #0d0b1e;"></div>
+
+    <!-- Floating particles -->
+    <div class="nk-preloader-particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
     </div>
 
     <div class="nk-preloader-content">
         <div>
-             <h2 data-i18n="جنة الالعاب">جنة الالعاب</h2>
+            <img src="assets/images/GAMERS_PARADISE_LOGO.png" alt="Games Paradise" class="nk-preloader-logo">
+            <h2 class="nk-preloader-title" data-i18n="جنة الالعاب">جنة الالعاب</h2>
+            <div class="nk-preloader-bar-wrap">
+                <div class="nk-preloader-bar"></div>
+            </div>
             <div class="nk-preloader-animation"></div>
         </div>
     </div>
 
     <div class="nk-preloader-skip" data-i18n="Skip">Skip</div>
 </div>
+
+<style>
+.nk-preloader-logo {
+    display: block;
+    margin: 0 auto 14px;
+    width: 180px;
+    max-width: 60vw;
+    filter: drop-shadow(0 0 20px rgba(124,58,237,0.7))
+            drop-shadow(0 0 40px rgba(6,182,212,0.4));
+    animation: plLogoIn 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+.nk-preloader-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff 0%, #06b6d4 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 22px;
+    animation: plFadeUp 0.6s 0.2s ease both;
+}
+
+/* Progress bar */
+.nk-preloader-bar-wrap {
+    width: 240px;
+    max-width: 70vw;
+    height: 4px;
+    background: rgba(124,58,237,0.15);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    animation: plFadeUp 0.6s 0.3s ease both;
+    box-shadow: 0 0 10px rgba(124,58,237,0.2);
+}
+
+.nk-preloader-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7c3aed, #06b6d4, #f472b6);
+    border-radius: 2px;
+    animation: plBar 2.4s cubic-bezier(0.4,0,0.2,1) 0.4s forwards;
+    box-shadow: 0 0 12px rgba(6,182,212,0.8);
+}
+
+/* Floating particles */
+.nk-preloader-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.nk-preloader-particles span {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    animation: plParticle linear infinite;
+}
+
+.nk-preloader-particles span:nth-child(1)  { left: 8%;  width: 5px;  height: 5px;  animation-duration: 6s;   animation-delay: 0s;    background: rgba(124,58,237,0.6); }
+.nk-preloader-particles span:nth-child(2)  { left: 18%; width: 4px;  height: 4px;  animation-duration: 8s;   animation-delay: 1s;    background: rgba(6,182,212,0.5); }
+.nk-preloader-particles span:nth-child(3)  { left: 30%; width: 7px;  height: 7px;  animation-duration: 7s;   animation-delay: 0.5s;  background: rgba(244,114,182,0.4); }
+.nk-preloader-particles span:nth-child(4)  { left: 45%; width: 4px;  height: 4px;  animation-duration: 9s;   animation-delay: 2s;    background: rgba(124,58,237,0.5); }
+.nk-preloader-particles span:nth-child(5)  { left: 58%; width: 6px;  height: 6px;  animation-duration: 6.5s; animation-delay: 0.8s;  background: rgba(6,182,212,0.6); }
+.nk-preloader-particles span:nth-child(6)  { left: 70%; width: 5px;  height: 5px;  animation-duration: 8s;   animation-delay: 1.5s;  background: rgba(244,114,182,0.45); }
+.nk-preloader-particles span:nth-child(7)  { left: 82%; width: 4px;  height: 4px;  animation-duration: 7.5s; animation-delay: 0.3s;  background: rgba(124,58,237,0.5); }
+.nk-preloader-particles span:nth-child(8)  { left: 92%; width: 6px;  height: 6px;  animation-duration: 6s;   animation-delay: 1.2s;  background: rgba(6,182,212,0.4); }
+
+@keyframes plParticle {
+    0%   { transform: translateY(0) scale(1);      opacity: 0.9; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(-110vh) scale(0.2); opacity: 0; }
+}
+
+@keyframes plBar {
+    0%   { width: 0%; }
+    40%  { width: 55%; }
+    70%  { width: 80%; }
+    100% { width: 100%; }
+}
+
+@keyframes plLogoIn {
+    from { opacity: 0; transform: scale(0.7) translateY(20px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+@keyframes plFadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .nk-preloader-logo  { width: 130px; }
+    .nk-preloader-title { font-size: 1.1rem; letter-spacing: 2px; }
+    .nk-preloader-bar-wrap { width: 160px; }
+}
+</style>
 <!-- END: Page Preloader -->
